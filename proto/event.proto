@@ -1,17 +1,50 @@
 syntax = "proto3";
 
-package nori.event.v1;
+package nori.event.v0;
 
 import "message.proto";
 import "user.proto";
 
+// 打字指示類型
+enum TypingState {
+  TYPING = 0; // 正在輸入文字
+  SELECTING_STICKER = 1; // 正在選擇貼圖
+  SELECTING_EMOJI = 2; // 正在選擇 emoji
+  SELECTING_GIF = 3; // 正在選擇 GIF
+  SELECTING_ATTACHMENT = 4; // 正在選擇檔案或圖片
+  DELETING_TEXT = 5; // 正在刪除文字
+}
+
+// 打字狀態更新結構
+message TypingPartialContent {
+  int32 start_cursor_position = 1; // 原先的起始游標位置
+  int32 end_cursor_position = 2; // 原先的結尾游標位置
+  string partial_input = 3; // 部分輸入的內容
+}
+
+// 打字指示結構
+message TypingIndicator {
+  string room_id = 1;
+  string user_id = 2;
+  TypingState typing_state = 3; // 當前的打字狀態
+  TypingPartialContent partial_input = 4; // (可選) 當前輸入的部分內容
+}
+
+// 上線狀態結構
+message OnlineStatus {
+  string user_id = 1;
+  bool is_online = 2;
+}
+
 // 事件結構
 message Event {
   string event_id = 1; // UUID
-  string type = 2;
+  string type = 2; // 事件類型 (e.g., "MESSAGE", "USER_TYPING", "USER_ONLINE_STATUS")
   oneof payload {
     Message message = 3;
     User user = 4;
+    TypingIndicator typing = 5; // 新增的打字指示事件
+    OnlineStatus online_status = 6; // 新增的上線/下線狀態事件
   }
 }
 
@@ -25,8 +58,22 @@ message SubscribeEventsResponse {
   repeated Event events = 1;
 }
 
+// 訂閱輸入狀態的請求
+message SubscribeTypingIndicatorRequest {
+  string room_id = 1; // UUID 聊天室 ID
+  string user_id = 2; // UUID 訂閱者 ID
+}
+
+// 訂閱輸入狀態的回應
+message SubscribeTypingIndicatorResponse {
+  repeated TypingIndicator typing_indicators = 1; // 包含所有輸入狀態的列表
+}
+
 // 事件服務
 service EventService {
   // 訂閱即時事件
   rpc SubscribeEvents(SubscribeEventsRequest) returns (SubscribeEventsResponse);
+
+  // 訂閱輸入狀態
+  rpc SubscribeTypingIndicator(SubscribeTypingIndicatorRequest) returns (SubscribeTypingIndicatorResponse);
 }

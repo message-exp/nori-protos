@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package nori.room.v1;
+package nori.room.v0;
 
 import "user.proto";
 
@@ -33,11 +33,13 @@ message Room {
   repeated RoomMember members = 5;
   string parent_room_id = 6; // UUID of the parent room
   string category_id = 7; // UUID of the category
-  string pinned_message_id = 8; // UUID of the pinned message
-  int32 slowmode_cooldown = 9; // Slowmode cooldown in seconds
-  string default_notification = 10; // Notification setting: all/mention/none
-  int32 notification_cooldown = 11; // Notification cooldown
-  RoomState state = 12; // Room state (ACTIVE, ARCHIVED, BANNED)
+  RoomState state = 8; // Room state (ACTIVE, ARCHIVED, BANNED)
+  string created_at = 9; // 創建時間
+  string updated_at = 10; // 更新時間
+  // repeated string pinned_message_id = 11; // UUID of the pinned message
+  // int32 slowmode_cooldown = 12; // Slowmode cooldown in seconds
+  // string default_notification = 13; // Notification setting: all/mention/none
+  // int32 notification_cooldown = 14; // Notification cooldown
 }
 
 // 創建聊天室的請求
@@ -49,6 +51,18 @@ message CreateRoomRequest {
 // 創建聊天室的回應
 message CreateRoomResponse {
   ChatRoom room_id = 1;
+}
+
+// 創建子聊天室的請求
+message CreateSubRoomRequest {
+  string parent_room_id = 1;
+  string name = 2;
+  RoomType type = 3;
+}
+
+// 創建子聊天室的回應
+message CreateSubRoomResponse {
+  Room sub_room = 1;
 }
 
 // 更新聊天室狀態的請求
@@ -154,8 +168,9 @@ message ChangeRoomPermissionResponse {
 
 // 聊天室服務
 service RoomService {
-  rpc CreateChatRoom(CreateRoomRequest) returns (CreateRoomResponse);
-  rpc UpdateChatRoomStatus(UpdateRoomStatusRequest) returns (UpdateRoomStatusResponse);
+  rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse);
+  rpc CreateSubRoom(CreateSubRoomRequest) returns (CreateSubRoomResponse);
+  rpc UpdateRoomStatus(UpdateRoomStatusRequest) returns (UpdateRoomStatusResponse);
   rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse);
   rpc JoinRoom(JoinRoomRequest) returns (JoinRoomResponse);
   rpc LeaveRoom(LeaveRoomRequest) returns (LeaveRoomResponse);

@@ -1,12 +1,22 @@
 syntax = "proto3";
 
-package nori.user.v1;
+package nori.user.v0;
 
 // 定義使用者資料
 message User {
   string user_id = 1; // UUID
   string username = 2;
   string status = 3;
+}
+
+// 獲取使用者資料的請求
+message GetUserRequest {
+  string user_id = 1; // UUID
+}
+
+// 獲取使用者資料的回應 (這個粒度好像有點大)
+message GetUserResponse {
+  User user = 1;
 }
 
 // 更新使用者狀態的請求
@@ -23,6 +33,9 @@ message UpdateUserStatusResponse {
 
 // 使用者服務
 service UserService {
+  // 獲取使用者資料
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+
   // 更新使用者狀態
   rpc UpdateUserStatus(UpdateUserStatusRequest) returns (UpdateUserStatusResponse);
 }

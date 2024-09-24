@@ -1,17 +1,96 @@
 syntax = "proto3";
 
-package nori.message.v1;
+package nori.message.v0;
 
 import "user.proto";
+
+// 訊息類型
+enum MessageType {
+  TEXT = 0;
+  AUDIO = 1;
+  STICKER = 2;
+  IMAGE = 3;
+  VIDEO = 4;
+  FILE = 5;  // 檔案, 包含聯絡資訊、位置、行事曆事件等
+}
+
+// 語音訊息
+message AudioMessage {
+  string url = 1;
+  int32 duration = 2;
+  string name = 3;
+}
+
+// 貼圖訊息
+message StickerMessage {
+  string url = 1;
+  string name = 2;
+  string info_url = 3;  // 貼圖資訊 URL (e.g., LINE 貼圖商店頁面)
+}
+
+// 相片訊息 (是否與檔案合併? 因為有 parse 參數)
+message ImageMessage {
+  string url = 1;
+  int32 width = 2;
+  int32 height = 3;
+  string name = 4;
+}
+
+// 影片訊息 (是否與檔案合併? 因為有 parse 參數)
+message VideoMessage {
+  string url = 1;
+  int32 width = 2;
+  int32 height = 3;
+  int32 duration = 4;
+  string name = 5;
+}
+
+// 檔案訊息
+message FileMessage {
+  string url = 1;
+  string name = 2;
+  int32 size = 3;
+  bool parse = 4;  // 是否解析檔案內容 (e.g. audio, image, video, contact, location, calendar event, etc.)
+}
+
+// 單種類型的訊息
+message MessageUnit {
+  MessageType type = 1;
+  oneof content {
+    string text = 2;
+    repeated string audio = 3;
+    repeated string image = 4;
+    repeated string video = 5;
+    repeated string file = 6;
+  }
+}
+
+// 已讀標記
+message ReadMark {
+  string user_id = 1; // UUID
+  bool read = 2; // 標記/取消已讀
+  bool anonymous = 3; // 是否匿名
+  int64 timestamp = 4;
+}
+
+// 訊息反應結構
+message Reaction {
+  string reaction_id = 1; // UUID
+  string emoji = 2; // Emoji 表情符號
+  string user_id = 3; // 添加反應的使用者
+}
 
 // 訊息結構
 message Message {
   string message_id = 1; // UUID
   string sender_id = 2; // UUID
   string room_id = 3; // UUID
-  string content = 4;
-  int64 timestamp = 5;
-  repeated string edit_history = 6;
+  string source_network = 4; // 來源網路 (e.g., "LINE", "Facebook", "Telegram", "Slack", "Discord", "WhatsApp", "WeChat", "KakaoTalk", "Viber", "Signal", "Skype", "Hangouts", "iMessage", "SMS", "Email", "Phone Call", "FaceTime", "Zoom", "Google Meet", "Microsoft Teams") => by GitHub Copilot
+  repeated MessageUnit content = 5;
+  int64 timestamp = 6;
+  repeated string edit_history = 7;
+  repeated Reaction reactions = 8;
+  repeated ReadMark read_marks = 9;
 }
 
 // 傳送訊息的請求
@@ -59,6 +138,43 @@ message DeleteMessageResponse {
   bool success = 1;
 }
 
+// 新增反應的請求
+message AddReactionRequest {
+  string message_id = 1;
+  string sender_id = 2;
+  string emoji = 3;
+}
+
+// 新增反應的回應
+message AddReactionResponse {
+  bool success = 1;
+}
+
+// 刪除反應的請求
+message RemoveReactionRequest {
+  string message_id = 1;
+  string user_id = 2;
+  string emoji = 3;
+}
+
+// 刪除反應的回應
+message RemoveReactionResponse {
+  bool success = 1;
+}
+
+// 標記訊息為已讀的請求
+message MarkMessageAsReadRequest {
+  string message_id = 1; // UUID
+  string user_id = 2; // UUID
+  bool read = 3; // 標記/取消已讀
+  bool anonymous = 4; // 是否匿名
+}
+
+// 標記訊息為已讀的回應
+message MarkMessageAsReadResponse {
+  bool success = 1;
+}
+
 // 訊息服務
 service MessageService {
   // 傳送訊息
@@ -67,6 +183,18 @@ service MessageService {
   // 接收訊息
   rpc ReceiveMessage(ReceiveMessageRequest) returns (ReceiveMessageResponse);
 
+  // 編輯訊息
   rpc EditMessage(EditMessageRequest) returns (EditMessageResponse);
+
+  // 刪除訊息
   rpc DeleteMessage(DeleteMessageRequest) returns (DeleteMessageResponse);
+
+  // 新增反應
+  rpc AddReaction(AddReactionRequest) returns (AddReactionResponse);
+  
+  // 刪除反應
+  rpc RemoveReaction(RemoveReactionRequest) returns (RemoveReactionResponse);
+
+  // 訊息已讀
+  rpc MarkMessageAsRead(MarkMessageAsReadRequest) returns (MarkMessageAsReadResponse);
 }
