@@ -1,0 +1,169 @@
+syntax = "proto3";
+
+package nori.room.v1;
+
+import "user.proto";
+
+// Enum for Room states
+enum RoomState {
+  ACTIVE = 0;
+  ARCHIVED = 1;
+  BANNED = 2;
+}
+
+// Room member structure
+message RoomMember {
+  string id = 1; // UUID
+  string nickname = 2;
+  repeated string roles = 3; // Member roles, array of strings
+}
+
+// Room permission structure
+message RoomPermission {
+  string member_role = 1; // Member or role
+  map<string, map<string, string>> permissions = 2; // Category and permissions (bool or other types)
+}
+
+// Main Room structure
+message Room {
+  string id = 1; // UUID
+  string name = 2;
+  string description = 3;
+  repeated RoomPermission permissions = 4;
+  repeated RoomMember members = 5;
+  string parent_room_id = 6; // UUID of the parent room
+  string category_id = 7; // UUID of the category
+  string pinned_message_id = 8; // UUID of the pinned message
+  int32 slowmode_cooldown = 9; // Slowmode cooldown in seconds
+  string default_notification = 10; // Notification setting: all/mention/none
+  int32 notification_cooldown = 11; // Notification cooldown
+  RoomState state = 12; // Room state (ACTIVE, ARCHIVED, BANNED)
+}
+
+// 創建聊天室的請求
+message CreateRoomRequest {
+  string room_name = 1;
+  repeated string member_ids = 2; // 參與者 ID 列表
+}
+
+// 創建聊天室的回應
+message CreateRoomResponse {
+  ChatRoom room_id = 1;
+}
+
+// 更新聊天室狀態的請求
+message UpdateRoomStatusRequest {
+  string room_id = 1;
+  common.Status room_status = 2;
+}
+
+// 更新聊天室狀態的回應
+message UpdateRoomStatusResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+// Join room request and response
+message JoinRoomRequest {
+  string room_id = 1;
+  string user_id = 2; // UUID of the user joining
+}
+
+message JoinRoomResponse {
+  bool success = 1;
+}
+
+// Leave room request and response
+message LeaveRoomRequest {
+  string room_id = 1;
+  string user_id = 2;
+}
+
+message LeaveRoomResponse {
+  bool success = 1;
+}
+
+// Invite user request and response
+message InviteUserRequest {
+  string room_id = 1;
+  string user_id = 2;
+}
+
+message InviteUserResponse {
+  bool success = 1;
+}
+
+// Kick user request and response
+message KickUserRequest {
+  string room_id = 1;
+  string user_id = 2;
+}
+
+message KickUserResponse {
+  bool success = 1;
+}
+
+// Ban user request and response
+message BanUserRequest {
+  string room_id = 1;
+  string user_id = 2;
+}
+
+message BanUserResponse {
+  bool success = 1;
+}
+
+// Delete room request and response
+message DeleteRoomRequest {
+  string room_id = 1;
+}
+
+message DeleteRoomResponse {
+  bool success = 1;
+}
+
+// Change room name request and response
+message ChangeRoomNameRequest {
+  string room_id = 1;
+  string new_name = 2;
+}
+
+message ChangeRoomNameResponse {
+  bool success = 1;
+}
+
+// Change room description request and response
+message ChangeRoomDescriptionRequest {
+  string room_id = 1;
+  string new_description = 2;
+}
+
+message ChangeRoomDescriptionResponse {
+  bool success = 1;
+}
+
+// Change room permission request and response
+message ChangeRoomPermissionRequest {
+  string room_id = 1;
+  RoomPermission permission = 2;
+}
+
+message ChangeRoomPermissionResponse {
+  bool success = 1;
+}
+
+// 聊天室服務
+service RoomService {
+  rpc CreateChatRoom(CreateRoomRequest) returns (CreateRoomResponse);
+  rpc UpdateChatRoomStatus(UpdateRoomStatusRequest) returns (UpdateRoomStatusResponse);
+  rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse);
+  rpc JoinRoom(JoinRoomRequest) returns (JoinRoomResponse);
+  rpc LeaveRoom(LeaveRoomRequest) returns (LeaveRoomResponse);
+  rpc InviteUser(InviteUserRequest) returns (InviteUserResponse);
+  rpc KickUser(KickUserRequest) returns (KickUserResponse);
+  rpc BanUser(BanUserRequest) returns (BanUserResponse);
+  rpc DeleteRoom(DeleteRoomRequest) returns (DeleteRoomResponse);
+  rpc ChangeRoomName(ChangeRoomNameRequest) returns (ChangeRoomNameResponse);
+  rpc ChangeRoomDescription(ChangeRoomDescriptionRequest) returns (ChangeRoomDescriptionResponse);
+  rpc ChangeRoomPermission(ChangeRoomPermissionRequest) returns (ChangeRoomPermissionResponse);
+}

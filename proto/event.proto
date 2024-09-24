@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package nori.event.v1;
+
+import "message.proto";
+import "user.proto";
+
+// 事件結構
+message Event {
+  string event_id = 1; // UUID
+  string type = 2;
+  oneof payload {
+    Message message = 3;
+    User user = 4;
+  }
+}
+
+// 訂閱事件的請求
+message SubscribeEventsRequest {
+  string user_id = 1;
+}
+
+// 訂閱事件的回應
+message SubscribeEventsResponse {
+  repeated Event events = 1;
+}
+
+// 事件服務
+service EventService {
+  // 訂閱即時事件
+  rpc SubscribeEvents(SubscribeEventsRequest) returns (SubscribeEventsResponse);
+}

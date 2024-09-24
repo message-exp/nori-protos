@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package nori.message.v1;
+
+import "user.proto";
+
+// 訊息結構
+message Message {
+  string message_id = 1; // UUID
+  string sender_id = 2; // UUID
+  string room_id = 3; // UUID
+  string content = 4;
+  int64 timestamp = 5;
+  repeated string edit_history = 6;
+}
+
+// 傳送訊息的請求
+message SendMessageRequest {
+  string room_id = 1;
+  string sender_id = 2;
+  string content = 3;
+}
+
+// 傳送訊息的回應
+message SendMessageResponse {
+  bool success = 1;
+  string error_message = 2;
+  // string message_id = 1;
+}
+
+// 接收訊息的請求
+message ReceiveMessageRequest {
+  string receiver_id = 1;
+}
+
+// 接收訊息的回應
+message ReceiveMessageResponse {
+  repeated Message messages = 1;
+}
+
+// 編輯訊息的請求
+message EditMessageRequest {
+  string message_id = 1;
+  string new_content = 2;
+}
+
+// 編輯訊息的回應
+message EditMessageResponse {
+  bool success = 1;
+}
+
+// 刪除訊息的請求
+message DeleteMessageRequest {
+  string message_id = 1;
+}
+
+// 刪除訊息的回應
+message DeleteMessageResponse {
+  bool success = 1;
+}
+
+// 訊息服務
+service MessageService {
+  // 傳送訊息
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
+
+  // 接收訊息
+  rpc ReceiveMessage(ReceiveMessageRequest) returns (ReceiveMessageResponse);
+
+  rpc EditMessage(EditMessageRequest) returns (EditMessageResponse);
+  rpc DeleteMessage(DeleteMessageRequest) returns (DeleteMessageResponse);
+}
