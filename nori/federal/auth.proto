@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package nori.federal.auth.v0;
+
+message AuthTokenRequest {
+  string token = 1;
+}
+
+message AuthTokenResponse {
+  bool valid = 1;
+}
+
+service AuthServerService {
+  rpc ValidateToken(AuthTokenRequest) returns (AuthTokenResponse);
+}

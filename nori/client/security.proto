@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package nori.client.pq_security.v0;  // Updated package to indicate post-quantum security
+
+option go_package = "nori/pq/security";
+
+message PublicKey {
+  string id = 1; // Unique identifier for the key (can be user or device specific)
+  bytes key = 2; // Public key (will use a post-quantum cryptographic algorithm)
+}
+
+message EncryptedMessage {
+  string message_id = 1; // Unique message identifier
+  bytes ciphertext = 2;   // Encrypted message content (PQC-encrypted)
+  bytes nonce = 3;        // Nonce for encryption algorithm
+}
+
+message Signature {
+  bytes signature = 1; // Digital signature for message authenticity
+}
+
+message HandshakeRequest {
+  string client_id = 1;  // Client's unique identifier
+  PublicKey client_public_key = 2; // Client's PQC public key
+}
+
+message HandshakeResponse {
+  string server_id = 1; // Server's unique identifier
+  PublicKey server_public_key = 2; // Server's PQC public key
+  Signature handshake_signature = 3; // Server’s signature to verify handshake
+}
+
+message SecureMessageRequest {
+  string sender_id = 1;
+  string recipient_id = 2;
+  EncryptedMessage encrypted_message = 3;
+}
+
+message SecureMessageResponse {
+  bool success = 1;
+  string status = 2;  // E.g., "Message delivered", "Error: Invalid signature", etc.
+}
+
+service PostQuantumMessaging {
+  // Establishes a secure handshake with the server using PQC.
+  rpc Handshake (HandshakeRequest) returns (HandshakeResponse);
+
+  // Send encrypted messages with post-quantum cryptographic techniques.
+  rpc SendMessage (SecureMessageRequest) returns (SecureMessageResponse);
+}

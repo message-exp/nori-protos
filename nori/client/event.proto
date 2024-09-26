@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package nori.event.v0;
+package nori.client.event.v0;
 
 import "message.proto";
 import "user.proto";
@@ -41,8 +41,8 @@ message Event {
   string event_id = 1; // UUID
   string type = 2; // 事件類型 (e.g., "MESSAGE", "USER_TYPING", "USER_ONLINE_STATUS")
   oneof payload {
-    Message message = 3;
-    User user = 4;
+    nori.message.v0.Message message = 3;
+    nori.user.v0.User user = 4;
     TypingIndicator typing = 5; // 新增的打字指示事件
     OnlineStatus online_status = 6; // 新增的上線/下線狀態事件
   }
@@ -72,7 +72,7 @@ message SubscribeTypingIndicatorResponse {
 // 事件服務
 service EventService {
   // 訂閱即時事件
-  rpc SubscribeEvents(SubscribeEventsRequest) returns (SubscribeEventsResponse);
+  rpc SubscribeEvents(SubscribeEventsRequest) returns (stream Event);
 
   // 訂閱輸入狀態
   rpc SubscribeTypingIndicator(SubscribeTypingIndicatorRequest) returns (SubscribeTypingIndicatorResponse);

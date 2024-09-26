@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package nori.federal.federation.v0;
+
+import "message.proto";
+import "user.proto";
+import "room.proto";
+
+// 用於 server 之間的聯邦請求
+message FederationSyncRequest {
+  string server_id = 1; // 發起同步的伺服器 ID
+  string target_server_id = 2; // 目標伺服器 ID
+  repeated MessageSync messages = 3; // 要同步的訊息
+  repeated UserSync users = 4; // 要同步的用戶狀態
+  repeated RoomSync rooms = 5; // 要同步的聊天室狀態
+}
+
+// 聯邦同步的回應
+message FederationSyncResponse {
+  bool success = 1;
+  string error_message = 2; // 若同步失敗，回傳錯誤訊息
+}
+
+// 訊息同步結構
+message MessageSync {
+  Message message = 1;
+}
+
+// 用戶狀態同步結構
+message UserSync {
+  User user = 1;
+  repeated string joined_rooms = 2;
+}
+
+// 聊天室狀態同步結構
+message RoomSync {
+  Room room = 1;
+}
+
+// 身分驗證請求
+message FederationAuthRequest {
+  string server_id = 1; // 發起請求的伺服器 ID
+  string auth_token = 2; // 用於驗證的 token，例如 JWT
+}
+
+// 身分驗證回應
+message FederationAuthResponse {
+  bool success = 1;
+  string error_message = 2; // 若授權失敗，回傳錯誤訊息
+}
+
+// 伺服器列表與探索
+message ServerListRequest {
+  string requesting_server_id = 1;
+}
+
+message ServerListResponse {
+  repeated ServerInfo servers = 1; // 所有可用伺服器的列表
+}
+
+message ServerInfo {
+  string server_id = 1;
+  string server_name = 2;
+  string server_url = 3;
+}
+
+message MessageForwardRequest {
+  string source_server_id = 1; // 發送訊息的伺服器 ID
+  string target_server_id = 2; // 目標伺服器 ID
+  MessageSync message = 3; // 要轉發的訊息
+}
+
+message MessageForwardResponse {
+  bool success = 1;
+  string error_message = 2;
+}
+
+
+// 聯邦服務
+service FederationService {
+  // 伺服器之間同步數據
+  rpc SyncData(FederationSyncRequest) returns (FederationSyncResponse);
+  rpc ForwardMessage(MessageForwardRequest) returns (MessageForwardResponse);
+}

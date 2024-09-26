@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package nori.room.v0;
+package nori.client.room.v0;
 
-import "user.proto";
+// import "user.proto";
 
 // Enum for Room states
 enum RoomState {
@@ -21,7 +21,7 @@ message RoomMember {
 // Room permission structure
 message RoomPermission {
   string member_role = 1; // Member or role
-  map<string, map<string, string>> permissions = 2; // Category and permissions (bool or other types)
+  map<string, string> permissions = 2; // Category and permissions (bool or other types)
 }
 
 // Main Room structure
@@ -50,14 +50,13 @@ message CreateRoomRequest {
 
 // 創建聊天室的回應
 message CreateRoomResponse {
-  ChatRoom room_id = 1;
+  Room room_id = 1;
 }
 
 // 創建子聊天室的請求
 message CreateSubRoomRequest {
   string parent_room_id = 1;
   string name = 2;
-  RoomType type = 3;
 }
 
 // 創建子聊天室的回應
@@ -68,7 +67,7 @@ message CreateSubRoomResponse {
 // 更新聊天室狀態的請求
 message UpdateRoomStatusRequest {
   string room_id = 1;
-  common.Status room_status = 2;
+  // common.Status room_status = 2;
 }
 
 // 更新聊天室狀態的回應
@@ -171,7 +170,6 @@ service RoomService {
   rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse);
   rpc CreateSubRoom(CreateSubRoomRequest) returns (CreateSubRoomResponse);
   rpc UpdateRoomStatus(UpdateRoomStatusRequest) returns (UpdateRoomStatusResponse);
-  rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse);
   rpc JoinRoom(JoinRoomRequest) returns (JoinRoomResponse);
   rpc LeaveRoom(LeaveRoomRequest) returns (LeaveRoomResponse);
   rpc InviteUser(InviteUserRequest) returns (InviteUserResponse);

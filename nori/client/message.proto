@@ -1,8 +1,6 @@
 syntax = "proto3";
 
-package nori.message.v0;
-
-import "user.proto";
+package nori.client.message.v0;
 
 // 訊息類型
 enum MessageType {
@@ -54,14 +52,15 @@ message FileMessage {
 }
 
 // 單種類型的訊息
-message MessageUnit {
+message MessageContent {
   MessageType type = 1;
   oneof content {
     string text = 2;
-    repeated string audio = 3;
-    repeated string image = 4;
-    repeated string video = 5;
-    repeated string file = 6;
+    AudioMessage audio = 3;
+    StickerMessage sticker = 4;
+    ImageMessage image = 5;
+    VideoMessage video = 6;
+    FileMessage file = 7;
   }
 }
 
@@ -86,7 +85,7 @@ message Message {
   string sender_id = 2; // UUID
   string room_id = 3; // UUID
   string source_network = 4; // 來源網路 (e.g., "LINE", "Facebook", "Telegram", "Slack", "Discord", "WhatsApp", "WeChat", "KakaoTalk", "Viber", "Signal", "Skype", "Hangouts", "iMessage", "SMS", "Email", "Phone Call", "FaceTime", "Zoom", "Google Meet", "Microsoft Teams") => by GitHub Copilot
-  repeated MessageUnit content = 5;
+  repeated MessageContent content = 5;
   int64 timestamp = 6;
   repeated string edit_history = 7;
   repeated Reaction reactions = 8;
@@ -97,7 +96,7 @@ message Message {
 message SendMessageRequest {
   string room_id = 1;
   string sender_id = 2;
-  string content = 3;
+  MessageContent content = 3;
 }
 
 // 傳送訊息的回應

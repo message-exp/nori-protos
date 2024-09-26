@@ -1,12 +1,20 @@
 syntax = "proto3";
 
-package nori.user.v0;
+package nori.client.user.v0;
+
+// 使用者狀態
+enum UserStatus {
+  ONLINE = 0;
+  OFFLINE = 1;
+  AWAY = 2;
+  BUSY = 3;
+}
 
 // 定義使用者資料
 message User {
   string user_id = 1; // UUID
   string username = 2;
-  string status = 3;
+  UserStatus status = 3;
 }
 
 // 獲取使用者資料的請求
