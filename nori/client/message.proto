@@ -3,6 +3,7 @@ syntax = "proto3";
 package nori.client.message.v0;
 
 import "common/message.proto";
+import "google/protobuf/timestamp.proto";
 
 // 傳送訊息的請求
 message SendMessageRequest {
@@ -13,9 +14,8 @@ message SendMessageRequest {
 
 // 傳送訊息的回應
 message SendMessageResponse {
-  bool success = 1;
-  string error_message = 2;
-  // string message_id = 1;
+  string message_id = 1;
+  google.protobuf.Timestamp timestamp = 2; // 發送時間
 }
 
 // 接收訊息的請求
@@ -31,12 +31,12 @@ message ReceiveMessageResponse {
 // 編輯訊息的請求
 message EditMessageRequest {
   string message_id = 1;
-  string new_content = 2;
+  nori.common.message.v0.MessageContent new_content = 2;
 }
 
 // 編輯訊息的回應
 message EditMessageResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
 // 刪除訊息的請求
@@ -46,7 +46,7 @@ message DeleteMessageRequest {
 
 // 刪除訊息的回應
 message DeleteMessageResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
 // 新增反應的請求
@@ -58,7 +58,7 @@ message AddReactionRequest {
 
 // 新增反應的回應
 message AddReactionResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
 // 刪除反應的請求
@@ -70,7 +70,7 @@ message RemoveReactionRequest {
 
 // 刪除反應的回應
 message RemoveReactionResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
 // 標記訊息為已讀的請求
@@ -83,7 +83,7 @@ message MarkMessageAsReadRequest {
 
 // 標記訊息為已讀的回應
 message MarkMessageAsReadResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
 // 訊息服務

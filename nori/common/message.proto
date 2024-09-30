@@ -3,6 +3,7 @@ syntax = "proto3";
 package nori.common.message.v0;
 
 import "common/types.proto";
+import "google/protobuf/timestamp.proto";
 
 // 語音訊息
 message AudioMessage {
@@ -18,7 +19,7 @@ message StickerMessage {
   string info_url = 3;  // 貼圖資訊 URL (e.g., LINE 貼圖商店頁面)
 }
 
-// 相片訊息 (是否與檔案合併? 因為有 parse 參數)
+// 相片訊息
 message ImageMessage {
   string url = 1;
   int32 width = 2;
@@ -26,7 +27,7 @@ message ImageMessage {
   string name = 4;
 }
 
-// 影片訊息 (是否與檔案合併? 因為有 parse 參數)
+// 影片訊息
 message VideoMessage {
   string url = 1;
   int32 width = 2;
@@ -45,7 +46,7 @@ message FileMessage {
 
 // 單種類型的訊息
 message MessageContent {
-  MessageType type = 1;
+  nori.common.types.v0.MessageType type = 1;
   oneof content {
     string text = 2;
     AudioMessage audio = 3;
@@ -61,7 +62,7 @@ message ReadMark {
   string user_id = 1; // UUID
   bool read = 2; // 標記/取消已讀
   bool anonymous = 3; // 是否匿名
-  int64 timestamp = 4;
+  google.protobuf.Timestamp timestamp = 4;
 }
 
 // 訊息反應結構
@@ -76,10 +77,36 @@ message Message {
   string message_id = 1; // UUID
   string sender_id = 2; // UUID
   string room_id = 3; // UUID
-  string source_network = 4; // 來源網路 (e.g., "LINE", "Facebook", "Telegram", "Slack", "Discord", "WhatsApp", "WeChat", "KakaoTalk", "Viber", "Signal", "Skype", "Hangouts", "iMessage", "SMS", "Email", "Phone Call", "FaceTime", "Zoom", "Google Meet", "Microsoft Teams") => by GitHub Copilot
+  nori.common.message.v0.SourceNetwork source_network = 4; // 語源網路，定義為 enum
   repeated MessageContent content = 5;
-  int64 timestamp = 6;
+  google.protobuf.Timestamp timestamp = 6;
   repeated string edit_history = 7;
   repeated Reaction reactions = 8;
   repeated ReadMark read_marks = 9;
+}
+
+// SourceNetwork enum
+enum SourceNetwork {
+  UNKNOWN = 0;
+  WHATSAPP = 1;
+  MESSENGER = 2;
+  TELEGRAM = 3;
+  WECHAT = 4;
+  SNAPCHAT = 5;
+  VIBER = 6;
+  LINE = 7;
+  KAKAOTALK = 8;
+  SLACK = 9;
+  DISCORD = 10;
+  SIGNAL = 11;
+  SKYPE = 12;
+  IMESSAGE = 13;
+  HANGOUTS = 14;
+  SMS = 15;
+  EMAIL = 16;
+  PHONE_CALL = 17;
+  FACETIME = 18;
+  ZOOM = 19;
+  GOOGLE_MEET = 20;
+  MICROSOFT_TEAMS = 21;
 }

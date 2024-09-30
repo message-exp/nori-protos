@@ -2,9 +2,10 @@ syntax = "proto3";
 
 package nori.federal.federation.v0;
 
-import "message.proto";
-import "user.proto";
-import "room.proto";
+import "common/message.proto";
+import "client/user.proto";
+import "client/room.proto";
+import "google/protobuf/timestamp.proto";
 
 // 用於 server 之間的聯邦請求
 message FederationSyncRequest {
@@ -13,28 +14,28 @@ message FederationSyncRequest {
   repeated MessageSync messages = 3; // 要同步的訊息
   repeated UserSync users = 4; // 要同步的用戶狀態
   repeated RoomSync rooms = 5; // 要同步的聊天室狀態
+  google.protobuf.Timestamp sync_time = 6; // 同步時間
 }
 
 // 聯邦同步的回應
 message FederationSyncResponse {
-  bool success = 1;
-  string error_message = 2; // 若同步失敗，回傳錯誤訊息
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
 // 訊息同步結構
 message MessageSync {
-  Message message = 1;
+  nori.common.message.v0.Message message = 1;
 }
 
 // 用戶狀態同步結構
 message UserSync {
-  User user = 1;
+  nori.client.user.v0.User user = 1;
   repeated string joined_rooms = 2;
 }
 
 // 聊天室狀態同步結構
 message RoomSync {
-  Room room = 1;
+  nori.client.room.v0.Room room = 1;
 }
 
 // 身分驗證請求
@@ -45,40 +46,49 @@ message FederationAuthRequest {
 
 // 身分驗證回應
 message FederationAuthResponse {
-  bool success = 1;
-  string error_message = 2; // 若授權失敗，回傳錯誤訊息
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
-// 伺服器列表與探索
+// 伺服器列表與探索請求
 message ServerListRequest {
   string requesting_server_id = 1;
 }
 
+// 伺服器列表與探索回應
 message ServerListResponse {
   repeated ServerInfo servers = 1; // 所有可用伺服器的列表
 }
 
+// 伺服器資訊
 message ServerInfo {
   string server_id = 1;
   string server_name = 2;
   string server_url = 3;
 }
 
+// 訊息轉發請求
 message MessageForwardRequest {
   string source_server_id = 1; // 發送訊息的伺服器 ID
   string target_server_id = 2; // 目標伺服器 ID
   MessageSync message = 3; // 要轉發的訊息
 }
 
+// 訊息轉發回應
 message MessageForwardResponse {
-  bool success = 1;
-  string error_message = 2;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
-
 
 // 聯邦服務
 service FederationService {
   // 伺服器之間同步數據
   rpc SyncData(FederationSyncRequest) returns (FederationSyncResponse);
+
+  // 伺服器之間轉發訊息
   rpc ForwardMessage(MessageForwardRequest) returns (MessageForwardResponse);
+
+  // 伺服器列表與探索
+  rpc GetServerList(ServerListRequest) returns (ServerListResponse);
+
+  // 聯邦身分驗證
+  rpc AuthenticateServer(FederationAuthRequest) returns (FederationAuthResponse);
 }

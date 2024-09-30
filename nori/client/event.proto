@@ -3,7 +3,9 @@ syntax = "proto3";
 package nori.client.event.v0;
 
 import "common/message.proto";
-import "user.proto";
+import "common/types.proto";
+import "client/user.proto";
+import "google/protobuf/timestamp.proto";
 
 // 打字指示類型
 enum TypingState {
@@ -28,34 +30,39 @@ message TypingIndicator {
   string user_id = 2;
   TypingState typing_state = 3; // 當前的打字狀態
   TypingPartialContent partial_input = 4; // (可選) 當前輸入的部分內容
+  google.protobuf.Timestamp updated_at = 5;
 }
 
 // 上線狀態結構
 message OnlineStatus {
   string user_id = 1;
   bool is_online = 2;
+  google.protobuf.Timestamp updated_at = 3;
+}
+
+// 事件類型
+enum EventType {
+  MESSAGE = 0;
+  USER_TYPING = 1;
+  USER_ONLINE_STATUS = 2;
 }
 
 // 事件結構
 message Event {
   string event_id = 1; // UUID
-  string type = 2; // 事件類型 (e.g., "MESSAGE", "USER_TYPING", "USER_ONLINE_STATUS")
+  EventType type = 2; // 事件類型
   oneof payload {
     nori.common.message.v0.Message message = 3;
     nori.client.user.v0.User user = 4;
     TypingIndicator typing = 5; // 新增的打字指示事件
     OnlineStatus online_status = 6; // 新增的上線/下線狀態事件
   }
+  google.protobuf.Timestamp timestamp = 7;
 }
 
 // 訂閱事件的請求
 message SubscribeEventsRequest {
   string user_id = 1;
-}
-
-// 訂閱事件的回應
-message SubscribeEventsResponse {
-  repeated Event events = 1;
 }
 
 // 訂閱輸入狀態的請求
@@ -64,16 +71,11 @@ message SubscribeTypingIndicatorRequest {
   string user_id = 2; // UUID 訂閱者 ID
 }
 
-// 訂閱輸入狀態的回應
-message SubscribeTypingIndicatorResponse {
-  repeated TypingIndicator typing_indicators = 1; // 包含所有輸入狀態的列表
-}
-
 // 事件服務
 service EventService {
   // 訂閱即時事件
   rpc SubscribeEvents(SubscribeEventsRequest) returns (stream Event);
 
   // 訂閱輸入狀態
-  rpc SubscribeTypingIndicator(SubscribeTypingIndicatorRequest) returns (SubscribeTypingIndicatorResponse);
+  rpc SubscribeTypingIndicator(SubscribeTypingIndicatorRequest) returns (stream TypingIndicator);
 }

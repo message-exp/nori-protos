@@ -19,3 +19,10 @@ enum UserStatus {
   AWAY = 2;
   BUSY = 3;
 }
+
+// 事件類型
+enum EventType {
+  MESSAGE = 0;
+  USER_TYPING = 1;
+  USER_ONLINE_STATUS = 2;
+}

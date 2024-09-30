@@ -2,19 +2,14 @@ syntax = "proto3";
 
 package nori.client.user.v0;
 
-// 使用者狀態
-enum UserStatus {
-  ONLINE = 0;
-  OFFLINE = 1;
-  AWAY = 2;
-  BUSY = 3;
-}
+import "common/types.proto";
 
 // 定義使用者資料
 message User {
   string user_id = 1; // UUID
   string username = 2;
-  UserStatus status = 3;
+  nori.common.types.v0.UserStatus status = 3;
+  // Add other user fields as needed
 }
 
 // 獲取使用者資料的請求
@@ -22,7 +17,7 @@ message GetUserRequest {
   string user_id = 1; // UUID
 }
 
-// 獲取使用者資料的回應 (這個粒度好像有點大)
+// 獲取使用者資料的回應
 message GetUserResponse {
   User user = 1;
 }
@@ -30,13 +25,12 @@ message GetUserResponse {
 // 更新使用者狀態的請求
 message UpdateUserStatusRequest {
   string user_id = 1; // UUID
-  string status = 2;
+  nori.common.types.v0.UserStatus status = 2;
 }
 
 // 更新使用者狀態的回應
 message UpdateUserStatusResponse {
-  bool success = 1;
-  string error_message = 2;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
 // 使用者服務

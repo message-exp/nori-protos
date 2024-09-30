@@ -4,47 +4,67 @@ package nori.client.pq_security.v0;  // Updated package to indicate post-quantum
 
 option go_package = "nori/pq/security";
 
+import "google/protobuf/timestamp.proto";
+
+// 定義後量子加密演算法
+enum PQCAlgorithm {
+  UNKNOWN_ALGORITHM = 0;
+  FALCON = 1;
+  SPHINCS = 2;
+  // Add other PQC algorithms as needed
+}
+
+// 公鑰結構
 message PublicKey {
   string id = 1; // Unique identifier for the key (can be user or device specific)
   bytes key = 2; // Public key (will use a post-quantum cryptographic algorithm)
+  PQCAlgorithm algorithm = 3; // 後量子加密演算法
 }
 
+// 加密訊息結構
 message EncryptedMessage {
   string message_id = 1; // Unique message identifier
   bytes ciphertext = 2;   // Encrypted message content (PQC-encrypted)
   bytes nonce = 3;        // Nonce for encryption algorithm
+  PQCAlgorithm algorithm = 4; // 後量子加密演算法
 }
 
+// 簽名結構
 message Signature {
   bytes signature = 1; // Digital signature for message authenticity
 }
 
+// 握手請求
 message HandshakeRequest {
   string client_id = 1;  // Client's unique identifier
   PublicKey client_public_key = 2; // Client's PQC public key
 }
 
+// 握手回應
 message HandshakeResponse {
   string server_id = 1; // Server's unique identifier
   PublicKey server_public_key = 2; // Server's PQC public key
   Signature handshake_signature = 3; // Server’s signature to verify handshake
+  google.protobuf.Timestamp timestamp = 4; // 握手時間
 }
 
+// 安全訊息請求
 message SecureMessageRequest {
   string sender_id = 1;
   string recipient_id = 2;
   EncryptedMessage encrypted_message = 3;
 }
 
+// 安全訊息回應
 message SecureMessageResponse {
-  bool success = 1;
-  string status = 2;  // E.g., "Message delivered", "Error: Invalid signature", etc.
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
+// 後量子訊息服務
 service PostQuantumMessaging {
-  // Establishes a secure handshake with the server using PQC.
+  // 建立與伺服器的安全握手
   rpc Handshake (HandshakeRequest) returns (HandshakeResponse);
 
-  // Send encrypted messages with post-quantum cryptographic techniques.
+  // 使用後量子加密技術傳送加密訊息
   rpc SendMessage (SecureMessageRequest) returns (SecureMessageResponse);
 }

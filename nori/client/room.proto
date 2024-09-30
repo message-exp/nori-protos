@@ -2,7 +2,8 @@ syntax = "proto3";
 
 package nori.client.room.v0;
 
-// import "user.proto";
+import "common/types.proto";
+import "google/protobuf/timestamp.proto";
 
 // Enum for Room states
 enum RoomState {
@@ -34,8 +35,8 @@ message Room {
   string parent_room_id = 6; // UUID of the parent room
   string category_id = 7; // UUID of the category
   RoomState state = 8; // Room state (ACTIVE, ARCHIVED, BANNED)
-  string created_at = 9; // 創建時間
-  string updated_at = 10; // 更新時間
+  google.protobuf.Timestamp created_at = 9; // 創建時間
+  google.protobuf.Timestamp updated_at = 10; // 更新時間
   // repeated string pinned_message_id = 11; // UUID of the pinned message
   // int32 slowmode_cooldown = 12; // Slowmode cooldown in seconds
   // string default_notification = 13; // Notification setting: all/mention/none
@@ -50,7 +51,8 @@ message CreateRoomRequest {
 
 // 創建聊天室的回應
 message CreateRoomResponse {
-  Room room_id = 1;
+  string room_id = 1;
+  google.protobuf.Timestamp created_at = 2;
 }
 
 // 創建子聊天室的請求
@@ -62,107 +64,116 @@ message CreateSubRoomRequest {
 // 創建子聊天室的回應
 message CreateSubRoomResponse {
   Room sub_room = 1;
+  google.protobuf.Timestamp created_at = 2;
 }
 
 // 更新聊天室狀態的請求
 message UpdateRoomStatusRequest {
   string room_id = 1;
-  // common.Status room_status = 2;
+  RoomState new_state = 2;
 }
 
 // 更新聊天室狀態的回應
 message UpdateRoomStatusResponse {
-  bool success = 1;
-  string error_message = 2;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
-// Join room request and response
+// Join room request
 message JoinRoomRequest {
   string room_id = 1;
   string user_id = 2; // UUID of the user joining
 }
 
+// Join room response
 message JoinRoomResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
-// Leave room request and response
+// Leave room request
 message LeaveRoomRequest {
   string room_id = 1;
   string user_id = 2;
 }
 
+// Leave room response
 message LeaveRoomResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
-// Invite user request and response
+// Invite user request
 message InviteUserRequest {
   string room_id = 1;
   string user_id = 2;
 }
 
+// Invite user response
 message InviteUserResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
-// Kick user request and response
+// Kick user request
 message KickUserRequest {
   string room_id = 1;
   string user_id = 2;
 }
 
+// Kick user response
 message KickUserResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
-// Ban user request and response
+// Ban user request
 message BanUserRequest {
   string room_id = 1;
   string user_id = 2;
 }
 
+// Ban user response
 message BanUserResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
-// Delete room request and response
+// Delete room request
 message DeleteRoomRequest {
   string room_id = 1;
 }
 
+// Delete room response
 message DeleteRoomResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
-// Change room name request and response
+// Change room name request
 message ChangeRoomNameRequest {
   string room_id = 1;
   string new_name = 2;
 }
 
+// Change room name response
 message ChangeRoomNameResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
-// Change room description request and response
+// Change room description request
 message ChangeRoomDescriptionRequest {
   string room_id = 1;
   string new_description = 2;
 }
 
+// Change room description response
 message ChangeRoomDescriptionResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
-// Change room permission request and response
+// Change room permission request
 message ChangeRoomPermissionRequest {
   string room_id = 1;
   RoomPermission permission = 2;
 }
 
+// Change room permission response
 message ChangeRoomPermissionResponse {
-  bool success = 1;
+  // 空，使用 gRPC 狀態碼處理成功或錯誤
 }
 
 // 聊天室服務

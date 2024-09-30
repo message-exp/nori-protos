@@ -2,15 +2,22 @@ syntax = "proto3";
 
 package nori.client.auth.v0;
 
+import "google/protobuf/timestamp.proto";
+
+// 登入請求
 message LoginRequest {
   string username = 1;
-  string password = 2;
+  string password = 2; // 建議使用安全連線 (如 TLS) 傳輸
 }
 
+// 登入回應
 message LoginResponse {
   string token = 1;
+  google.protobuf.Timestamp issued_at = 2; // 發行時間
 }
 
+// 認證客戶端服務
 service AuthClientService {
+  // 使用者登入
   rpc Login(LoginRequest) returns (LoginResponse);
 }
