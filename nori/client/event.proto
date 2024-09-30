@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package nori.client.event.v0;
 
-import "message.proto";
+import "common/message.proto";
 import "user.proto";
 
 // 打字指示類型
@@ -41,8 +41,8 @@ message Event {
   string event_id = 1; // UUID
   string type = 2; // 事件類型 (e.g., "MESSAGE", "USER_TYPING", "USER_ONLINE_STATUS")
   oneof payload {
-    nori.message.v0.Message message = 3;
-    nori.user.v0.User user = 4;
+    nori.common.message.v0.Message message = 3;
+    nori.client.user.v0.User user = 4;
     TypingIndicator typing = 5; // 新增的打字指示事件
     OnlineStatus online_status = 6; // 新增的上線/下線狀態事件
   }
