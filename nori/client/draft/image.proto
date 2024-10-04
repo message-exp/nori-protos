@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package nori.client.image.v0;
+
+import "google/protobuf/timestamp.proto";
+
+message Image { // Image ?
+  // ImageType type = 1;
+  // string hash = 1;
+  string url = 2;
+  string file_name = 2;
+  google.protobuf.Timestamp created_at = 3;
+
+  int32 width = 2;
+  int32 height = 3;
+}

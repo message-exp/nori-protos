@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package nori.client.message.v0;
+
+// SourceNetwork enum
+enum Network {
+  NORI = 0;
+  WHATSAPP = 1;
+  MESSENGER = 2;
+  TELEGRAM = 3;
+  WECHAT = 4;
+  SNAPCHAT = 5;
+  VIBER = 6;
+  LINE = 7;
+  KAKAOTALK = 8;
+  SLACK = 9;
+  DISCORD = 10;
+  SIGNAL = 11;
+  SKYPE = 12;
+  IMESSAGE = 13;
+  HANGOUTS = 14;
+  SMS = 15;
+  EMAIL = 16;
+  PHONE_CALL = 17;
+  FACETIME = 18;
+  ZOOM = 19;
+  GOOGLE_MEET = 20;
+  MICROSOFT_TEAMS = 21;
+  UNKNOWN = 22;
+}
+
+message SourceNetwork {
+  oneof content {
+    Network network = 1;
+    string other = 2;
+  }
+}

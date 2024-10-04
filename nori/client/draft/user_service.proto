@@ -1,16 +1,9 @@
 syntax = "proto3";
 
-package nori.client.user.v0;
+package nori.client.role.v0;
 
-import "common/types.proto";
-
-// 定義使用者資料
-message User {
-  string user_id = 1; // UUID
-  string username = 2;
-  nori.common.types.v0.UserStatus status = 3;
-  // Add other user fields as needed
-}
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/color.proto";
 
 // 獲取使用者資料的請求
 message GetUserRequest {

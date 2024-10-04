@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-package nori.client.message.v0;
+package nori.client.role.v0;
 
-import "common/message.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/color.proto";
 
 // 傳送訊息的請求
 message SendMessageRequest {
   string room_id = 1;
   string sender_id = 2;
-  nori.common.message.v0.MessageContent content = 3;
+  MessageContent content = 3;
 }
 
 // 傳送訊息的回應
@@ -42,6 +42,8 @@ message EditMessageResponse {
 // 刪除訊息的請求
 message DeleteMessageRequest {
   string message_id = 1;
+
+  // 要求刪除的人, 預設為自己
 }
 
 // 刪除訊息的回應
@@ -51,9 +53,11 @@ message DeleteMessageResponse {
 
 // 新增反應的請求
 message AddReactionRequest {
-  string message_id = 1;
-  string sender_id = 2;
-  string emoji = 3;
+  bytes room_id = 1; // not encrypted
+
+  bytes message_id = 1; // encrypted
+  bytes user_id = 2; // 新增的人, encrypted
+  string emoji = 3; // encrypted
 }
 
 // 新增反應的回應
@@ -63,9 +67,12 @@ message AddReactionResponse {
 
 // 刪除反應的請求
 message RemoveReactionRequest {
-  string message_id = 1;
-  string user_id = 2;
-  string emoji = 3;
+  bytes room_id = 0; // not encrypted
+
+  bytes message_id = 1; // encrypted
+  bytes user_id = 2; // 原本新增的人, encrypted
+  // 刪除的人, 預設為新增的人自己, encrypted
+  string emoji = 3; // encrypted
 }
 
 // 刪除反應的回應
@@ -75,10 +82,12 @@ message RemoveReactionResponse {
 
 // 標記訊息為已讀的請求
 message MarkMessageAsReadRequest {
-  string message_id = 1; // UUID
-  string user_id = 2; // UUID
-  bool read = 3; // 標記/取消已讀
-  bool anonymous = 4; // 是否匿名
+  bytes room_id = 0; // not encrypted
+
+  bytes message_id = 1; // snowflake, encrypted
+  bytes user_id = 2; // snowflake, encrypted
+  bool read = 3; // 標記/取消已讀, encrypted
+  bool anonymous = 4; // 是否匿名, encrypted
 }
 
 // 標記訊息為已讀的回應
@@ -109,3 +118,4 @@ service MessageService {
   // 訊息已讀
   rpc MarkMessageAsRead(MarkMessageAsReadRequest) returns (MarkMessageAsReadResponse);
 }
+  
