@@ -4,13 +4,16 @@ package nori.client.image.v0;
 
 import "google/protobuf/timestamp.proto";
 
-message Image { // Image ?
-  // ImageType type = 1;
-  // string hash = 1;
-  string url = 2;
-  string file_name = 2;
-  google.protobuf.Timestamp created_at = 3;
+// Represents an image with associated metadata
+message Image {
+  // Reserving previously commented out fields to avoid reuse
+  reserved 1;
 
-  int32 width = 2;
-  int32 height = 3;
+  string url = 2;           // URL of the image
+  string file_name = 3;      // Name of the image file
+  google.protobuf.Timestamp created_at = 4;  // Timestamp when the image was created
+  
+  int32 width = 5;          // Width of the image in pixels
+  int32 height = 6;         // Height of the image in pixels
 }
+

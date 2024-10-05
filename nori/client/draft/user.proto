@@ -10,7 +10,7 @@ message User {
   string username = 2;
   string global_name = 3;
   Image avatar = 4;
-  nori.common.types.v0.UserStatus status = 3;
+  nori.common.types.v0.UserStatus status = 6; // 修正標籤號
   bool verified = 5; // 是否已驗證, email, KYC, human reCaptcha, etc.
   // Add other user fields as needed
 }

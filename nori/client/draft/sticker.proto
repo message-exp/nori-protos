@@ -6,6 +6,6 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/color.proto";
 
 message Sticker {
-  Image image_sticker = 2; // 貼圖圖片
-  string description = 3; // 貼圖描述
+  Image image_sticker = 1; // 貼圖圖片
+  string description = 2; // 貼圖描述
 }
