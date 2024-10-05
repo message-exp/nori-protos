@@ -18,5 +18,5 @@ message Folder {
     string description = 4;
     string parent_id = 5;
     Image icon = 6;
-    google.protobuf.Color color = 6;
+    google.protobuf.Color color = 7;
 }

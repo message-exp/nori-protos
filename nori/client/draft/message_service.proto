@@ -55,9 +55,9 @@ message DeleteMessageResponse {
 message AddReactionRequest {
   bytes room_id = 1; // not encrypted
 
-  bytes message_id = 1; // encrypted
-  bytes user_id = 2; // 新增的人, encrypted
-  string emoji = 3; // encrypted
+  bytes message_id = 2; // encrypted
+  bytes user_id = 3; // 新增的人, encrypted
+  string emoji = 4; // encrypted
 }
 
 // 新增反應的回應
@@ -67,12 +67,12 @@ message AddReactionResponse {
 
 // 刪除反應的請求
 message RemoveReactionRequest {
-  bytes room_id = 0; // not encrypted
+  bytes room_id = 1; // not encrypted
 
-  bytes message_id = 1; // encrypted
-  bytes user_id = 2; // 原本新增的人, encrypted
+  bytes message_id = 2; // encrypted
+  bytes user_id = 3; // 原本新增的人, encrypted
   // 刪除的人, 預設為新增的人自己, encrypted
-  string emoji = 3; // encrypted
+  string emoji = 4; // encrypted
 }
 
 // 刪除反應的回應
@@ -82,12 +82,12 @@ message RemoveReactionResponse {
 
 // 標記訊息為已讀的請求
 message MarkMessageAsReadRequest {
-  bytes room_id = 0; // not encrypted
+  bytes room_id = 1; // not encrypted
 
-  bytes message_id = 1; // snowflake, encrypted
-  bytes user_id = 2; // snowflake, encrypted
-  bool read = 3; // 標記/取消已讀, encrypted
-  bool anonymous = 4; // 是否匿名, encrypted
+  bytes message_id = 2; // snowflake, encrypted
+  bytes user_id = 3; // snowflake, encrypted
+  bool read = 4; // 標記/取消已讀, encrypted
+  bool anonymous = 5; // 是否匿名, encrypted
 }
 
 // 標記訊息為已讀的回應

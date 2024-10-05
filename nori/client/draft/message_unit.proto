@@ -11,6 +11,6 @@ message MessageUnit {
   oneof content {
     string text = 2;
     Sticker sticker = 3;
-    FileMessage file = 3;
+    FileMessage file = 4;
   }
 }
