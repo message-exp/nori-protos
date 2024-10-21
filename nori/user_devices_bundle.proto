@@ -1,0 +1,21 @@
+/**
+ * NORI API 0.1
+ */
+
+syntax = "proto3";
+
+package nori;
+ 
+// option java_package = "org.e2eelab.proto.skissm";
+// option java_outer_classname = "UserDevicesBundleProto";
+// option objc_class_prefix = "Objc";
+// option swift_prefix="Swift";
+ 
+/**
+ * Bundle for user devices.
+ */
+message UserDevicesBundle {
+  string domain = 1;                      // The domain.
+  string user_id = 2;                     // The user's ID.
+  repeated string device_id_list = 3;     // All of the user's devices ID.
+}

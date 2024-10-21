@@ -1,0 +1,28 @@
+/**
+ * NORI API 0.1
+ */
+
+syntax = "proto3";
+
+package nori;
+
+// option java_package = "org.e2eelab.proto.skissm";
+// option java_outer_classname = "E2eePackIdProto";
+// option objc_class_prefix = "Objc";
+// option swift_prefix="Swift";
+
+import "nori/ds_alg_type.proto";
+import "nori/hash_alg_type.proto";
+import "nori/kem_alg_type.proto";
+import "nori/sym_key_alg_type.proto";
+
+/**
+ * Msg for e2ee pack ID.
+ */
+message E2eePackId {
+  int32 ver = 1;                              // The version.
+  DsAlgType ds = 2;                           // The digital signature algorithm type.
+  KemAlgType kem = 3;                         // The kem algorithm type.
+  SymKeyAlgType sym_key = 4;                  // The symmetric-key algorithm type.
+  HashAlgType hash = 5;                       // The hash algorithm type.
+}
