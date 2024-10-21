@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package nori;
+
+// option java_package = "org.e2eelab.proto.skissm";
+// option java_outer_classname = "IdentityKeyProto";
+// option objc_class_prefix = "Objc";
+// option swift_prefix="Swift";
+
+import "nori/KeyPair.proto";
+
+/**
+ * The identity key.
+ */
+message IdentityKey {
+  KeyPair asym_key_pair = 1;      // The key pair for asymmetric encryption and decryption.
+  KeyPair sign_key_pair = 2;      // The key pair for signing and verifying signature.
+}

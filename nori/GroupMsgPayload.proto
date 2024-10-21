@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package nori;
+
+// option java_package = "org.e2eelab.proto.skissm";
+// option java_outer_classname = "GroupMsgPayloadProto";
+// option objc_class_prefix = "Objc";
+// option swift_prefix="Swift";
+
+/**
+ * Payload for group msg.
+ */
+message GroupMsgPayload {
+  uint32 sequence = 1;        // The sequence of the related group session.
+  bytes ciphertext = 2;       // The ciphertext.
+  bytes signature = 3;        // The signature signed by the sender.
+}

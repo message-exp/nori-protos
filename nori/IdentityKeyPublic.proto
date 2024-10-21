@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package nori;
+
+// option java_package = "org.e2eelab.proto.skissm";
+// option java_outer_classname = "IdentityKeyPublicProto";
+// option objc_class_prefix = "Objc";
+// option swift_prefix="Swift";
+
+/**
+ * The public key part of an identity key.
+ */
+message IdentityKeyPublic {
+  bytes asym_public_key = 1;      // The public key part for asymmetric encryption.
+  bytes sign_public_key = 2;      // The public key part for verifying signature.
+}

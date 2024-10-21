@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package skissm;
+ 
+option java_package = "org.e2eelab.proto.skissm";
+option java_outer_classname = "RemoveUserDeviceMsgProto";
+option objc_class_prefix = "Objc";
+option swift_prefix="Swift";
+ 
+import "skissm/E2eeAddress.proto";
+ 
+/**
+ * Msg for removing user device.
+ */
+message RemoveUserDeviceMsg {
+  E2eeAddress user_address = 1;                   // The removed user e2ee address.
+}
+ 

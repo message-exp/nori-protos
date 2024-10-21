@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package nori;
+
+// option java_package = "org.e2eelab.proto.skissm";
+// option java_outer_classname = "SignedPreKeyProto";
+// option objc_class_prefix = "Objc";
+// option swift_prefix="Swift";
+
+import "nori/KeyPair.proto";
+
+/**
+ * The signed pre-key.
+ */
+message SignedPreKey {
+  uint32 spk_id = 1;          // The signed pre-key ID.
+  KeyPair key_pair = 2;       // The signed pre-key pair.
+  bytes signature = 3;        // The signature of key_pair's public_key signed by the user's identity key.
+  int64 ttl = 4;              // The time stamp indicates that the signed pre-key will be removed.
+}
