@@ -1,0 +1,92 @@
+/**
+ * NORI API 0.1
+ */
+
+syntax = "proto3";
+
+package nori.v0;
+
+message CreateRoomRequest {
+  string user_id = 1;
+  string token = 2;
+  string room_name = 3;
+}
+
+message CreateRoomResponse {
+  string room_id = 1;
+}
+
+message LeaveRoomRequest {
+  string user_id = 1;
+  string token = 2;
+  string room_id = 3;
+}
+
+message LeaveRoomResponse {
+  
+}
+
+message DeleteRoomRequest {
+  string user_id = 1;
+  string token = 2;
+  string room_id = 3;
+}
+
+message DeleteRoomResponse {
+  
+}
+
+message AddRoomMembersRequest {
+  string user_id = 1;
+  string token = 2;
+  string room_id = 3;
+  repeated string new_user_id = 4;
+}
+
+message AddRoomMembersResponse {
+  
+}
+
+message RemoveRoomMemberConfig {
+  string removed_user_ids = 1;
+  bool ban = 2; // true: ban, false: kick and un-ban
+}
+
+message RemoveRoomMembersRequest {
+  string user_id = 1;
+  string token = 2;
+  string room_id = 3;
+  repeated RemoveRoomMemberConfig removed_users = 4;
+}
+
+message RemoveRoomMembersResponse {
+  
+}
+
+message ChangeRoomKeyRequest {
+  string user_id = 1;
+  string token = 2;
+  string room_id = 3;
+  // TODO: new keys
+}
+
+message ChangeRoomKeyResponse {
+  
+}
+
+/**
+ * Client-Server API for room management.
+ */
+service ClientRoom {
+  // reference: https://youtu.be/FESp2LHd42U?si=Br9CSVx2_25zGfIX
+  rpc ChangeRoomKey (ChangeRoomKeyRequest) returns (ChangeRoomKeyResponse);
+
+  rpc CreateRoom (CreateRoomRequest) returns (CreateRoomResponse);
+  // rpc GetRoom (GetRoomRequest) returns (GetRoomResponse); // change to more clear
+  // rpc UpdateRoom (UpdateRoomRequest) returns (UpdateRoomResponse); // tear into smaller parts?
+  rpc LeaveRoom (LeaveRoomRequest) returns (LeaveRoomResponse);
+  rpc DeleteRoom (DeleteRoomRequest) returns (DeleteRoomResponse);
+
+  rpc AddRoomMembers (AddRoomMembersRequest) returns (AddRoomMembersResponse);
+  rpc RemoveRoomMembers (RemoveRoomMembersRequest) returns (RemoveRoomMembersResponse);
+}

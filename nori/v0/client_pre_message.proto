@@ -1,0 +1,30 @@
+/**
+ * NORI API 0.1
+ */
+
+syntax = "proto3";
+
+package nori.v0;
+
+enum SourceNetType {
+  SOURCE_NET_TYPE_NORI = 0; // default
+  SOURCE_NET_TYPE_WHATSAPP = 1;
+  SOURCE_NET_TYPE_WECHAT = 2;
+  SOURCE_NET_TYPE_MESSENGER = 3;
+  SOURCE_NET_TYPE_TELEGRAM = 4;
+  SOURCE_NET_TYPE_SNAPCHAT = 5;
+  SOURCE_NET_TYPE_QQ = 6;
+  SOURCE_NET_TYPE_DISCORD = 7;
+  SOURCE_NET_TYPE_VIBER = 8;
+  SOURCE_NET_TYPE_LINE = 9;
+  SOURCE_NET_TYPE_SIGNAL = 10;
+  SOURCE_NET_TYPE_ZALO = 11;
+  SOURCE_NET_TYPE_KAKAOTALK = 12;
+}
+
+message PreDecriptedMessage {
+  string user_id = 1;
+  SourceNetType source_net_type = 2;
+  string message = 3;
+  // TODO: add reactions, read receipts and more
+}
