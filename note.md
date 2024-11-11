@@ -3,7 +3,7 @@
 - Services
 
 - federation
-    - home server: account.proto, ...
+    - home server
 - custom emoji => later
 - user status => later
     - device type

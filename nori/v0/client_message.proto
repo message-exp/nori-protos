@@ -33,7 +33,7 @@ message SendMessageResponse {
  * Client-Server API for message management.
  */
 service ClientMessage {
-  rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);  // ?
-  // rpc GetMessages (GetMessagesRequest) returns (GetMessagesResponse);  // by room? by user?
+  rpc SendMessage (stream SendMessageRequest) returns (SendMessageResponse);  // ?
+  // rpc GetMessages (GetMessagesRequest) returns (stream GetMessagesResponse);  // by room? by user?
   // TODO: add more
 }
