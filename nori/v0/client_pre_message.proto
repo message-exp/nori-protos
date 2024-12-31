@@ -26,5 +26,5 @@ message PreDecriptedMessage {
   string user_id = 1;
   SourceNetType source_net_type = 2;
   string message = 3;
-  // TODO: add reactions, read receipts and more
+  // TODO: add reactions, read receipts, files and more
 }

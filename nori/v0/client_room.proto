@@ -83,10 +83,11 @@ service ClientRoom {
 
   rpc CreateRoom (CreateRoomRequest) returns (CreateRoomResponse);
   // rpc GetRoom (GetRoomRequest) returns (GetRoomResponse); // change to more clear
-  // rpc UpdateRoom (UpdateRoomRequest) returns (UpdateRoomResponse); // tear into smaller parts?
+  
+  rpc AddRoomMembers (AddRoomMembersRequest) returns (AddRoomMembersResponse);
+  rpc RemoveRoomMembers (RemoveRoomMembersRequest) returns (RemoveRoomMembersResponse);
   rpc LeaveRoom (LeaveRoomRequest) returns (LeaveRoomResponse);
   rpc DeleteRoom (DeleteRoomRequest) returns (DeleteRoomResponse);
 
-  rpc AddRoomMembers (AddRoomMembersRequest) returns (AddRoomMembersResponse);
-  rpc RemoveRoomMembers (RemoveRoomMembersRequest) returns (RemoveRoomMembersResponse);
+  // rpc UpdateRoom (UpdateRoomRequest) returns (UpdateRoomResponse); // tear into smaller parts?
 }

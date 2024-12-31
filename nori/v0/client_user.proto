@@ -72,13 +72,14 @@ service ClientUser {
   rpc ChangeUserKey (ChangeUserKeyRequest) returns (google.protobuf.Empty);
 
   rpc RegisterUser (RegisterUserRequest) returns (RegisterUserResponse);
-  // rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse); // tear into smaller parts?
   rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+  // rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse); // tear into smaller parts?
 
   // TODO: multiple login methods, And it needs global rate limit
   rpc LoginByEmailPassword (LoginByEmailPasswordRequest) returns (LoginResponse); // needs global rate limit
   rpc Logout (LogoutRequest) returns (google.protobuf.Empty);
 
+  // contacts (reference: vCard format)
   // rpc AddContact (AddContactRequest) returns (AddContactResponse);
   // rpc UpdateContact (UpdateContactRequest) returns (UpdateContactResponse);
   // rpc RemoveContact (RemoveContactRequest) returns (RemoveContactResponse);
