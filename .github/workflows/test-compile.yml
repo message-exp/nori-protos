@@ -17,4 +17,4 @@ jobs:
           fetch-depth: 0
       - uses: arduino/setup-protoc@v3
       - name: Test compile proto files
-        run: protoc $(find protos/nori -name "*.proto")
+        run: protoc --proto_path=protos protos/nori/**/*.proto
