@@ -1,0 +1,20 @@
+name: Test compilation
+
+on:
+  pull_request:
+    branches:
+      - main
+    # Review gh actions docs if you want to further define triggers, paths, etc
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+
+jobs:
+  test-compile:
+    name: Test compilation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: arduino/setup-protoc@v3
+      - name: Test compile proto files
+        run: protoc $(find protos/nori -name "*.proto")
