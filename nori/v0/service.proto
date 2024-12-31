@@ -24,7 +24,7 @@ message JoinRoomRequest {
 service Service {
 
   rpc CreateUser (UserRequest) returns (google.protobuf.Empty) {}
-  rpc GetUser (UserRequest) returns (chat.User) {}
+  rpc GetUser (UserRequest) returns (nori.v0.User) {}
 
   rpc CreateRoom (nori.v0.Room) returns (google.protobuf.Empty) {}
   rpc JoinRoom (JoinRoomRequest) returns (google.protobuf.Empty) {}
