@@ -17,4 +17,4 @@ jobs:
           fetch-depth: 0
       - uses: arduino/setup-protoc@v3
       - name: Test compile proto files
-        run: protoc --proto_path=protos protos/nori/**/*.proto
+        run: protoc --proto_path=. --python_out=./gen nori/**/*.proto
