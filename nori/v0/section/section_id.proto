@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package nori.v0;
+
+/**
+ * Section identifier
+ */
+message SectionId {
+  // room_id + section_id
+  string section_id = 1;
+}

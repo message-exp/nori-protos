@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package nori.v0;
+
+/**
+ * User
+ */
+message UserId {
+  // 
+  string user_id = 1;
+}

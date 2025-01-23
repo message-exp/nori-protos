@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/section/section_id.proto";
+
+/**
+ * Section
+ */
+message Section {
+  // room_id + section_id
+  nori.v0.SectionId section_id = 1;
+}

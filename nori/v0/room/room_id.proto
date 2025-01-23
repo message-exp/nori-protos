@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package nori.v0;
+
+/**
+ * Room identifier
+ */
+message RoomId {
+  // total 64 bytes: snowflake id
+  bytes room_id = 1;
+}

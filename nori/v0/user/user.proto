@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/room/room.proto";
+
+/**
+ * User
+ */
+message User {
+  // 
+  string user_id = 1;
+  // 
+  string username = 2;
+  // 
+  repeated nori.v0.RoomId rooms = 4;
+}
+
+/**
+ * User password login request
+ */
+message UserPasswordLogin {
+  // 
+  string username = 1;
+  // 
+  string password = 2;
+}
