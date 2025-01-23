@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "google/protobuf/timestamp.proto";
+
+message Message {
+  string message_id = 1;
+  string author_id = 2;
+  string room_id = 3;
+  string text = 4;
+  google.protobuf.Timestamp timestamp = 5;
+}

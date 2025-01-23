@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "google/protobuf/empty.proto";
+
+import "nori/v0/message.proto";
+import "nori/v0/room.proto";
+import "nori/v0/user.proto";
+
+message UserRequest {
+  string username = 1;
+}
+
+message RoomRequest {
+  string room_id = 1;
+}
+
+message JoinRoomRequest {
+  string room_id = 1;
+  string username = 2;
+}
+
+service Service {
+
+  rpc CreateUser (UserRequest) returns (google.protobuf.Empty) {}
+  rpc GetUser (UserRequest) returns (nori.v0.User) {}
+
+  rpc CreateRoom (nori.v0.Room) returns (google.protobuf.Empty) {}
+  rpc JoinRoom (JoinRoomRequest) returns (google.protobuf.Empty) {}
+  rpc GetRoom (RoomRequest) returns (nori.v0.Room) {}
+
+  rpc SendMessage (nori.v0.Message) returns (google.protobuf.Empty) {}
+  rpc GetMessages (UserRequest) returns (stream nori.v0.Message) {}
+}
