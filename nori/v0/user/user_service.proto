@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "google/protobuf/empty.proto";
+
+import "nori/v0/user/user.proto";
+import "nori/v0/user/user_id.proto";
+import "nori/v0/user/user_login.proto";
+
+/**
+ * User services.
+ */
+service UserService {
+  // Get user information.
+  rpc GetUser (UserId) returns (User);
+  // Login with email and password.
+  // @exclude TODO: change response to token
+  rpc Login (UserEmailPasswordLogin) returns (google.protobuf.Empty);
+  // Log out the user.
+  // @exclude TODO: change request to token
+  rpc Logout (UserId) returns (google.protobuf.Empty);
+  
+  // Sign up a new user.
+  // @exclude TODO: change response to token
+  rpc Signup (User) returns (google.protobuf.Empty);
+  // Delete a user.
+  rpc DeleteUser (UserId) returns (google.protobuf.Empty);
+}

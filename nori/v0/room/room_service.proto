@@ -20,12 +20,18 @@ message JoinRoomRequest {
  * Room services.
  */
 service RoomService {
-  // 
-  rpc CreateRoom (nori.v0.Room) returns (google.protobuf.Empty);
-  // 
+  // Create a new room.
+  // @exclude TODO: change request format
+  rpc CreateRoom (Room) returns (google.protobuf.Empty);
+  // Invite a user to a room.
+  // @exclude TODO: change request format and file structure
+  rpc InviteToRoom (JoinRoomRequest) returns (google.protobuf.Empty);
+  // Ask to join a room.
+  // @exclude TODO: change request format and file structure
   rpc JoinRoom (JoinRoomRequest) returns (google.protobuf.Empty);
-  // 
+  // Leave a room. When there's no user left in the room, the room will be deleted.
+  // @exclude TODO: change request format and file structure
   rpc LeaveRoom (JoinRoomRequest) returns (google.protobuf.Empty);
-  // 
-  rpc GetRoom (nori.v0.RoomId) returns (nori.v0.Room);
+  // Get room information.
+  rpc GetRoom (RoomId) returns (Room);
 }

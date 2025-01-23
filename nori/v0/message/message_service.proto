@@ -11,8 +11,8 @@ import "nori/v0/user/user_id.proto";
  * Message services.
  */
 service MessageService {
-  // 
-  rpc SendMessage (nori.v0.Message) returns (google.protobuf.Empty) {}
-  // 
-  rpc GetMessages (nori.v0.UserId) returns (stream nori.v0.Message) {}
+  // Send a message.
+  rpc SendMessage (Message) returns (google.protobuf.Empty);
+  // Receive messages.
+  rpc GetMessages (UserId) returns (stream Message);
 }
