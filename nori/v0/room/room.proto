@@ -3,26 +3,22 @@ syntax = "proto3";
 package nori.v0;
 
 import "nori/v0/room/room_id.proto";
+import "nori/v0/room/room_member.proto";
 
 /**
- * Room
+ * Room object.
  */
 message Room {
-  // 
+  // Room identifier.
   nori.v0.RoomId room_id = 1;
-  // 
+  // Room name shared with all room members.
   string name = 2;
-  // 
-  repeated string members = 3;
-}
-
-/**
- * Room basic information
- */
-message RoomInfo {
-  // 
-  nori.v0.RoomId room_id = 1;
-  // 
-  string name = 2;
-  // avatar url
+  // Room custom name that is only showed to the user themselves.
+  string custom_name = 3;
+  // Room avatar URL that is shared with all room members.
+  string avatar_url = 4;
+  // Room avatar URL that is only showed to the user themselves.
+  string custom_avatar_url = 5;
+  // Room members.
+  repeated nori.v0.RoomMember members = 6;
 }

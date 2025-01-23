@@ -5,6 +5,7 @@ package nori.v0;
 import "google/protobuf/timestamp.proto";
 
 import "nori/v0/message/message_id.proto";
+import "nori/v0/message/message_history.proto";
 import "nori/v0/user/user_id.proto";
 import "nori/v0/section/section_id.proto";
 
@@ -12,23 +13,18 @@ import "nori/v0/section/section_id.proto";
  * Completed message object which is sent by the user.
  */
 message Message {
-  // The unique identifier of the message
+  // The unique identifier of the message.
   nori.v0.MessageId message_id = 1;
-  // 
-  google.protobuf.Timestamp created_at = 3;
-  // 
-  nori.v0.UserId author_id = 4;
-  // 
-  string text = 5;
-  // 
-  nori.v0.SectionId section_id = 6;
-}
+  // Message creation time.
+  google.protobuf.Timestamp created_at = 2;
 
-/**
- * Message history object.
- */
-message MessageHistory {
-  // who/when create the message
-  // who/when edit the message
-  // who/when delete the message
+  // @exclude the following fields should be hidden(encrypt) before sending to the server. (future roadmap)
+  // Author's user id of the message.
+  nori.v0.UserId author_id = 3;
+  // Message text content.
+  string text = 4;
+  // Message history.
+  repeated nori.v0.MessageHistory history = 5;
+  // Section id of which the message belongs to.
+  repeated nori.v0.SectionId section_id = 6;
 }

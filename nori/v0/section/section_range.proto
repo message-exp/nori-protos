@@ -6,13 +6,13 @@ import "nori/v0/section/section_id.proto";
 import "nori/v0/message/message_id.proto";
 
 /**
- * Message range in a section
+ * Message range object. A range of messages is a contiguous set of messages.
  */
 message SectionRange {
-  // 
+  // Section identifier.
   nori.v0.SectionId section_id = 1;
-  // 
+  // The start message_id of the range.
   nori.v0.MessageId start = 2;
-  // 
+  // The end message_id of the range.
   nori.v0.MessageId end = 3;
 }

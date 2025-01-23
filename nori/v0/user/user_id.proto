@@ -3,9 +3,11 @@ syntax = "proto3";
 package nori.v0;
 
 /**
- * User
+ * User identifier object.
  */
 message UserId {
-  // 
-  string user_id = 1;
+  // Home server domain of the user.
+  string home_server = 1;
+  // User identifier. 64 bits snowflake id.
+  bytes user_id = 2;
 }

@@ -5,11 +5,11 @@ package nori.v0;
 import "nori/v0/room/room_id.proto";
 
 /**
- * Message identifier
+ * Message identifier object.
  */
 message MessageId {
-  // Room id of the message
+  // Room id of the message.
   nori.v0.RoomId room_id = 1;
-  // 64 bytes snowflake id
+  // Message id (scope: inside the room). 64 bits snowflake id.
   bytes message_id = 2;
 }
