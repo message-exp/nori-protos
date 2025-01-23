@@ -9,7 +9,7 @@ import "nori/v0/user/user_id.proto";
  */
 message RoomMember {
   // User identifier.
-  nori.v0.UserId user_id = 1;
+  UserId user_id = 1;
   // User room nickname that is shared to all room members.
   string room_nickname = 2;
   // User custom nickname that is only showed to the user themselves.

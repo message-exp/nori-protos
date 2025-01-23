@@ -10,9 +10,9 @@ import "nori/v0/message/message_id.proto";
  */
 message SectionRange {
   // Section identifier.
-  nori.v0.SectionId section_id = 1;
+  SectionId section_id = 1;
   // The start message_id of the range.
-  nori.v0.MessageId start = 2;
+  MessageId start = 2;
   // The end message_id of the range.
-  nori.v0.MessageId end = 3;
+  MessageId end = 3;
 }

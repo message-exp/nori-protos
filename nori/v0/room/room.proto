@@ -10,7 +10,7 @@ import "nori/v0/room/room_member.proto";
  */
 message Room {
   // Room identifier.
-  nori.v0.RoomId room_id = 1;
+  RoomId room_id = 1;
   // Room name shared with all room members.
   string name = 2;
   // Room custom name that is only showed to the user themselves.
@@ -20,5 +20,5 @@ message Room {
   // Room avatar URL that is only showed to the user themselves.
   string custom_avatar_url = 5;
   // Room members.
-  repeated nori.v0.RoomMember members = 6;
+  repeated RoomMember members = 6;
 }

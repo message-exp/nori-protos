@@ -9,7 +9,7 @@ import "nori/v0/section/section_id.proto";
  */
 message Section {
   // Section identifier.
-  nori.v0.SectionId section_id = 1;
+  SectionId section_id = 1;
   // @exclude TODO: change the type to topic type.
   // Topics of the section that are shared with all room members.
   repeated string room_topic = 2;

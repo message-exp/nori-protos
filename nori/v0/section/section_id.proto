@@ -9,7 +9,7 @@ import "nori/v0/room/room_id.proto";
  */
 message SectionId {
   // Room identifier.
-  nori.v0.RoomId room_id = 1;
+  RoomId room_id = 1;
   // 64 bits snowflake id. Scope: inside the room.
   bytes section_id = 2;
 }

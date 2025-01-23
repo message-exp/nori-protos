@@ -21,7 +21,7 @@ message User {
   // User's avatar URL.
   string avatar_url = 5;
   // Connected third-party accounts.
-  repeated nori.v0.UserConnection connected_accounts = 6;
+  repeated UserConnection connected_accounts = 6;
   // Rooms that the user is in.
-  repeated nori.v0.RoomId rooms = 7;
+  repeated RoomId rooms = 7;
 }

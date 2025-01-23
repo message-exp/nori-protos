@@ -22,7 +22,7 @@ message MessageHistory {
  */
 message MessageHistoryCreation {
   // Who create the message.
-  nori.v0.UserId created_by = 1;
+  UserId created_by = 1;
   // When create the message.
   google.protobuf.Timestamp created_at = 2;
 }
@@ -32,7 +32,7 @@ message MessageHistoryCreation {
  */
 message MessageHistoryUpdate {
   // Who update the message.
-  nori.v0.UserId updated_by = 1;
+  UserId updated_by = 1;
   // When update the message.
   google.protobuf.Timestamp updated_at = 2;
 }
@@ -42,7 +42,7 @@ message MessageHistoryUpdate {
  */
 message MessageHistoryDeletion {
   // Who delete the message.
-  nori.v0.UserId deleted_by = 1;
+  UserId deleted_by = 1;
   // When delete the message.
   google.protobuf.Timestamp deleted_at = 2;
 }

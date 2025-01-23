@@ -9,7 +9,7 @@ import "nori/v0/room/room_id.proto";
  */
 message MessageId {
   // Room id of the message.
-  nori.v0.RoomId room_id = 1;
+  RoomId room_id = 1;
   // Message id (scope: inside the room). 64 bits snowflake id.
   bytes message_id = 2;
 }
