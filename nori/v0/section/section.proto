@@ -3,16 +3,19 @@ syntax = "proto3";
 package nori.v0;
 
 import "nori/v0/section/section_id.proto";
+import "nori/v0/room/room_id.proto";
 
 /**
  * Section object. A section is one or many ranges of messages.
  */
 message Section {
+  // Room identifier.
+  RoomId room_id = 1;
   // Section identifier.
-  SectionId section_id = 1;
+  SectionId section_id = 2;
   // @exclude TODO: change the type to topic type.
   // Topics of the section that are shared with all room members.
-  repeated string room_topic = 2;
+  repeated string room_topic = 3;
   // Personal topics of the section that are associated with the user's account.
-  repeated string personal_topic = 3;
+  repeated string personal_topic = 4;
 }

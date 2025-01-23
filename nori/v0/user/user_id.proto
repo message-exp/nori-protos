@@ -6,8 +6,6 @@ package nori.v0;
  * User identifier object.
  */
 message UserId {
-  // Home server domain of the user.
-  string home_server = 1;
   // User identifier. 64 bits snowflake id.
   bytes user_id = 2;
 }

@@ -2,14 +2,10 @@ syntax = "proto3";
 
 package nori.v0;
 
-import "nori/v0/room/room_id.proto";
-
 /**
  * Section identifier object.
  */
 message SectionId {
-  // Room identifier.
-  RoomId room_id = 1;
   // 64 bits snowflake id. Scope: inside the room.
   bytes section_id = 2;
 }

@@ -12,16 +12,18 @@ import "nori/v0/room/room_id.proto";
 message User {
   // User identifier.
   nori.v0.UserId user_id = 1;
+  // Home server domain of the user.
+  string home_server = 2;
   // User's unique username.
-  string username = 2;
+  string username = 3;
   // User's email address.
-  string email = 3;
+  string email = 4;
   // User's display name.
-  string display_name = 4;
+  string display_name = 5;
   // User's avatar URL.
-  string avatar_url = 5;
+  string avatar_url = 6;
   // Connected third-party accounts.
-  repeated UserConnection connected_accounts = 6;
+  repeated UserConnection connected_accounts = 7;
   // Rooms that the user is in.
-  repeated RoomId rooms = 7;
+  repeated RoomId rooms = 8;
 }
