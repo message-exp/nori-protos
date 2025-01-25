@@ -6,13 +6,19 @@ import "google/protobuf/empty.proto";
 
 import "nori/v0/message/message.proto";
 import "nori/v0/user/user_id.proto";
+import "nori/v0/options.proto";
 
 /**
  * Message services.
  */
 service MessageService {
-  // Send a message.
-  rpc SendMessage (Message) returns (google.protobuf.Empty);
-  // Receive messages.
-  rpc GetMessages (UserId) returns (stream Message);
+  // Authentication: Required. Send a message.
+  rpc SendMessage (Message) returns (google.protobuf.Empty) {
+    option (nori.v0.options.requires_authentication) = true;
+  }
+  
+  // Authentication: Required. Receive messages.
+  rpc GetMessages (UserId) returns (stream Message) {
+    option (nori.v0.options.requires_authentication) = true;
+  }
 }

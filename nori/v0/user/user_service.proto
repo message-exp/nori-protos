@@ -7,23 +7,30 @@ import "google/protobuf/empty.proto";
 import "nori/v0/user/user.proto";
 import "nori/v0/user/user_id.proto";
 import "nori/v0/user/user_login.proto";
+import "nori/v0/options.proto";
 
 /**
  * User services.
  */
 service UserService {
-  // Get user information.
-  rpc GetUser (UserId) returns (User);
-  // Login with email and password.
-  // @exclude TODO: change response to token
-  rpc Login (UserEmailPasswordLogin) returns (google.protobuf.Empty);
-  // Log out the user.
-  // @exclude TODO: change request to token
-  rpc Logout (UserId) returns (google.protobuf.Empty);
+  // Authentication: Not required. Get user information.
+  rpc GetUser (UserId) returns (User) {
+    option (nori.v0.options.requires_authentication) = false;
+  }
   
-  // Sign up a new user.
-  // @exclude TODO: change response to token
+  // Login with email and password.
+  rpc Login (UserEmailPasswordLogin) returns (google.protobuf.Empty);
+
+  // Authentication: Required. Log out the user.
+  rpc Logout (UserId) returns (google.protobuf.Empty) {
+    option (nori.v0.options.requires_authentication) = true;
+  }
+  
+  // Authentication: Not required. Sign up a new user.
   rpc Signup (User) returns (google.protobuf.Empty);
-  // Delete a user.
-  rpc DeleteUser (UserId) returns (google.protobuf.Empty);
+
+  // Authentication: Required. Delete a user.
+  rpc DeleteUser (UserId) returns (google.protobuf.Empty) {
+    option (nori.v0.options.requires_authentication) = true;
+  }
 }

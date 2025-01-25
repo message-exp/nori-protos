@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package nori.v0.options;
+
+import "google/protobuf/descriptor.proto";
+
+// Define a custom option for authentication
+extend google.protobuf.MethodOptions {
+  optional bool requires_authentication = 50001;
+}
