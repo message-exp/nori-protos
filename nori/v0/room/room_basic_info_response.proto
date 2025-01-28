@@ -5,9 +5,9 @@ package nori.v0;
 import "nori/v0/room/room_id.proto";
 
 /**
- * Room basic information object.
+ * Room basic information response object.
  */
-message RoomBasicInfo {
+message RoomBasicInfoResponse {
   // Room identifier.
   RoomId room_id = 1;
 

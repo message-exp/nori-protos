@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/room/room_id.proto";
+
+/**
+ * Room basic information request object.
+ */
+message RoomBasicInfoRequest {
+  // Room identifier.
+  RoomId room_id = 1;
+  // Room name shared with all room members.
+  string shared_name = 2;
+  // reserve for custom name
+  reserved 3;
+  // Room avatar URL that is shared with all room members.
+  string shared_avatar_url = 4;
+}

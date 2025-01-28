@@ -12,11 +12,11 @@ message Room {
   // Room identifier.
   RoomId room_id = 1;
   // Room name shared with all room members.
-  string name = 2;
+  string shared_name = 2;
   // Room custom name that is only showed to the user themselves.
   string custom_name = 3;
   // Room avatar URL that is shared with all room members.
-  string avatar_url = 4;
+  string shared_avatar_url = 4;
   // Room avatar URL that is only showed to the user themselves.
   string custom_avatar_url = 5;
   // Room members.
