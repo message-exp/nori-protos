@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/room/room_basic_info.proto";
+
+/**
+ * List of room basic information.
+ */
+message RoomList {
+  // Room basic information list.
+  repeated RoomBasicInfo rooms = 1;
+}

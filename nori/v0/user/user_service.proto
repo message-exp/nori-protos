@@ -7,6 +7,7 @@ import "google/protobuf/empty.proto";
 import "nori/v0/user/user.proto";
 import "nori/v0/user/user_id.proto";
 import "nori/v0/user/user_login.proto";
+import "nori/v0/room/room_list.proto";
 import "nori/v0/options.proto";
 
 /**
@@ -31,6 +32,10 @@ service UserService {
 
   // Authentication: Required. Delete a user.
   rpc DeleteUser (UserId) returns (google.protobuf.Empty) {
+    option (nori.v0.options.requires_authentication) = true;
+  }
+
+  rpc GetUserRoomList (UserId) returns (RoomList) {
     option (nori.v0.options.requires_authentication) = true;
   }
 }
