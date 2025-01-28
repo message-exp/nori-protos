@@ -7,6 +7,7 @@ import "google/protobuf/empty.proto";
 import "nori/v0/user/user.proto";
 import "nori/v0/user/user_id.proto";
 import "nori/v0/user/user_login.proto";
+import "nori/v0/user/user_profile.proto";
 import "nori/v0/room/room_list.proto";
 import "nori/v0/options.proto";
 
@@ -35,6 +36,12 @@ service UserService {
     option (nori.v0.options.requires_authentication) = true;
   }
 
+  // Authentication: Required. Update user profile information.
+  rpc UpdateUserProfile (UserProfile) returns (google.protobuf.Empty) {
+    option (nori.v0.options.requires_authentication) = true;
+  }
+
+  // Authentication: Required. Get user room list.
   rpc GetUserRoomList (UserId) returns (RoomList) {
     option (nori.v0.options.requires_authentication) = true;
   }
