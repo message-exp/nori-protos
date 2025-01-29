@@ -6,27 +6,5 @@ package nori.v0;
  * User connection object. It will record the information of the connection between the user's nori account and third-party accounts.
  */
 message UserConnection {
-  oneof connection {
-    GoogleUserConnection google = 1;
-  }
-}
-
-/**
- * Google user connection object.
- */
-message GoogleUserConnection {
-  // 
-  string google_id = 1;
-  // 
-  string email = 2;
-  // 
-  string display_name = 3;
-  // 
-  string avatar_url = 4;
-  // 
-  string access_token = 5;
-  // 
-  string refresh_token = 6;
-  // 
-  int64 expires_at = 7;
+  
 }
