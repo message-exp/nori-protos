@@ -11,7 +11,7 @@ import "nori/v0/room/room_id.proto";
  */
 message User {
   // User identifier.
-  nori.v0.UserId user_id = 1;
+  UserId user_id = 1;
   // Home server domain of the user.
   string home_server = 2;
   // User's unique username.
