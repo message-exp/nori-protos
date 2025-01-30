@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package nori.v0;
+
+/**
+ * User identifier object.
+ */
+message UserId {
+  // User identifier. 64 bits snowflake id.
+  bytes user_id = 2;
+}

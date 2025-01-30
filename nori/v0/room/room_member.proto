@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/user/user_id.proto";
+
+/**
+ * Room member object.
+ */
+message RoomMember {
+  // User identifier.
+  UserId user_id = 1;
+  // User room nickname that is shared to all room members.
+  string room_nickname = 2;
+  // User custom nickname that is only showed to the user themselves.
+  string custom_nickname = 3;
+}

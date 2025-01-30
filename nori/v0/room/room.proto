@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/room/room_id.proto";
+import "nori/v0/room/room_member.proto";
+
+/**
+ * Room object.
+ */
+message Room {
+  // Room identifier.
+  RoomId room_id = 1;
+  // Room name shared with all room members.
+  string shared_name = 2;
+  // Room custom name that is only showed to the user themselves.
+  string custom_name = 3;
+  // Room avatar URL that is shared with all room members.
+  string shared_avatar_url = 4;
+  // Room avatar URL that is only showed to the user themselves.
+  string custom_avatar_url = 5;
+  // Room members.
+  repeated RoomMember members = 6;
+}

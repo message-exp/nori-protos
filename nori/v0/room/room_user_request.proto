@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/room/room_id.proto";
+import "nori/v0/user/user_id.proto";
+
+/**
+ * Request to join a room.
+ */
+message RoomUserRequest {
+  // Room identifier.
+  RoomId room_id = 1;
+  // User identifier.
+  UserId user_id = 2;
+}

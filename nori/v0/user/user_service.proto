@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "google/protobuf/empty.proto";
+
+import "nori/v0/user/user.proto";
+import "nori/v0/user/user_id.proto";
+import "nori/v0/user/user_login.proto";
+import "nori/v0/user/user_profile.proto";
+import "nori/v0/room/room_list.proto";
+
+/**
+ * User services.
+ */
+service UserService {
+  // Authentication: Not required. Get user information.
+  rpc GetUser (UserId) returns (User);
+  
+  // Login with email and password.
+  rpc Login (UserEmailPasswordLogin) returns (google.protobuf.Empty);
+
+  // Authentication: Required. Log out the user.
+  rpc Logout (UserId) returns (google.protobuf.Empty);
+  
+  // Authentication: Not required. Sign up a new user.
+  rpc Signup (User) returns (google.protobuf.Empty);
+
+  // Authentication: Required. Delete a user.
+  rpc DeleteUser (UserId) returns (google.protobuf.Empty);
+
+  // Authentication: Required. Update user profile information.
+  rpc UpdateUserProfile (UserProfile) returns (google.protobuf.Empty);
+
+  // Authentication: Required. Get user room list.
+  rpc GetUserRoomList (UserId) returns (RoomList);
+}

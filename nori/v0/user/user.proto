@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/user/user_id.proto";
+import "nori/v0/user/user_connection.proto";
+import "nori/v0/room/room_id.proto";
+
+/**
+ * User object.
+ */
+message User {
+  // User identifier.
+  UserId user_id = 1;
+  // Home server domain of the user.
+  string home_server = 2;
+  // User's unique username.
+  string username = 3;
+  // User's email address.
+  string email = 4;
+  // User's display name.
+  string display_name = 5;
+  // User's avatar URL.
+  string avatar_url = 6;
+  // Connected third-party accounts.
+  repeated UserConnection connected_accounts = 7;
+  // Rooms that the user is in.
+  repeated RoomId rooms = 8;
+}

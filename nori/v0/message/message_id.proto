@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package nori.v0;
+
+/**
+ * Message identifier object.
+ */
+message MessageId {
+  // Message id (scope: inside the room). 64 bits snowflake id.
+  bytes message_id = 1;
+}

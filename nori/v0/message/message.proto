@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "google/protobuf/timestamp.proto";
+
+import "nori/v0/message/message_id.proto";
+import "nori/v0/message/message_history.proto";
+import "nori/v0/room/room_id.proto";
+import "nori/v0/user/user_id.proto";
+
+/**
+ * Completed message object which is sent by the user.
+ */
+message Message {
+  // Room id of the message.
+  RoomId room_id = 1;
+  // The unique identifier of the message.
+  MessageId message_id = 2;
+  // Message creation time.
+  google.protobuf.Timestamp created_at = 3;
+
+  // @exclude the following fields should be hidden(encrypt) before sending to the server. (future roadmap)
+  // Author's user id of the message.
+  UserId author_id = 4;
+  // Message text content.
+  string text = 5;
+  // Message history.
+  repeated MessageHistory history = 6;
+}

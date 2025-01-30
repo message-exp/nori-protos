@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "google/protobuf/empty.proto";
+
+import "nori/v0/room/room.proto";
+import "nori/v0/room/room_id.proto";
+import "nori/v0/room/room_create_request.proto";
+import "nori/v0/room/room_user_request.proto";
+import "nori/v0/room/room_basic_info_request.proto";
+
+/**
+ * Room services.
+ */
+service RoomService {
+  // Authentication: Required. Create a new room.
+  rpc CreateRoom (RoomCreateRequest) returns (google.protobuf.Empty);
+
+  // Authentication: Required. Invite a user to a room.
+  rpc InviteToRoom (RoomUserRequest) returns (google.protobuf.Empty);
+
+  // Authentication: Required. Ask to join a room.
+  rpc JoinRoom (RoomUserRequest) returns (google.protobuf.Empty);
+
+  // Authentication: Required. Leave a room. When there's no user left in the room, the room will be deleted.
+  rpc LeaveRoom (RoomUserRequest) returns (google.protobuf.Empty);
+
+  // Authentication: Not required. Get room information.
+  rpc GetRoom (RoomId) returns (Room);
+
+  // Authentication: Required. Update room basic/overview information.
+  rpc UpdateRoomBasic (RoomBasicInfoRequest) returns (google.protobuf.Empty);
+}
