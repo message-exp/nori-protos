@@ -16,7 +16,7 @@ import "nori/v0/options.proto";
  */
 service RoomService {
   // Authentication: Required. Create a new room.
-  rpc CreateRoom (RoomCreateRequest) returns (google.protobuf.Empty) {
+  rpc CreateRoom (RoomCreateRequest) returns (RoomId) {
     option (nori.v0.options.requires_authentication) = true;
   }
 
@@ -35,7 +35,7 @@ service RoomService {
     option (nori.v0.options.requires_authentication) = true;
   }
 
-  // Authentication: Not required. Get room information.
+  // Authentication: Required. Get room information.
   rpc GetRoom (RoomId) returns (Room);
 
   // Authentication: Required. Update room basic/overview information.
