@@ -12,8 +12,10 @@ message RoomBasicInfoRequest {
   RoomId room_id = 1;
   // Room name shared with all room members.
   string shared_name = 2;
-  // reserve for custom name
-  reserved 3;
+  // Room custom name that is only showed to the user themselves.
+  string custom_name = 3;
   // Room avatar URL that is shared with all room members.
-  string shared_avatar_url = 4;
+  // string shared_avatar_url = 4;
+  // Room avatar URL that is only showed to the user themselves.
+  // string custom_avatar_url = 5;
 }

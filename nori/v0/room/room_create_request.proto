@@ -7,5 +7,6 @@ package nori.v0;
  */
 message RoomCreateRequest {
   // Room name shared with all room members.
-  string name = 2;
+  string name = 1;
+  // TODO: invite members
 }
