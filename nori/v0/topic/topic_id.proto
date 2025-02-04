@@ -3,9 +3,9 @@ syntax = "proto3";
 package nori.v0;
 
 /**
- * Room identifier object.
+ * Topic identifier.
  */
-message RoomId {
+message TopicId {
   // 64 bits snowflake id.
-  uint64 room_id = 1;
+  uint64 topic_id = 1;
 }

@@ -5,9 +5,10 @@ package nori.v0;
 import "google/protobuf/timestamp.proto";
 
 import "nori/v0/message/message_id.proto";
-import "nori/v0/message/message_history.proto";
+// import "nori/v0/message/message_history.proto";
 import "nori/v0/room/room_id.proto";
 import "nori/v0/user/user_id.proto";
+// import "nori/v0/section/section_id.proto";
 
 /**
  * Completed message object which is sent by the user.
@@ -25,6 +26,8 @@ message Message {
   UserId author_id = 4;
   // Message text content.
   string text = 5;
-  // Message history.
-  repeated MessageHistory history = 6;
+  // Message history. Will not implement in MVP.
+  // repeated MessageHistory history = 6;
+  // Section id of which the message belongs to.
+  // repeated SectionId section_id = 7;
 }

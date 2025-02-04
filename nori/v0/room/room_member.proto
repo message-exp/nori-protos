@@ -12,6 +12,4 @@ message RoomMember {
   UserId user_id = 1;
   // User room nickname that is shared to all room members.
   string room_nickname = 2;
-  // User custom nickname that is only showed to the user themselves.
-  string custom_nickname = 3;
 }
