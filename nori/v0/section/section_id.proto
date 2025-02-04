@@ -7,5 +7,5 @@ package nori.v0;
  */
 message SectionId {
   // 64 bits snowflake id. Scope: inside the room.
-  bytes section_id = 2;
+  uint64 section_id = 2;
 }
