@@ -2,14 +2,14 @@ syntax = "proto3";
 
 package nori.v0;
 
-import "nori/v0/room/room_id.proto";
+import "nori/v0/user/user_id.proto";
 
 /**
  * Room create request body.
  */
 message RoomCreateRequest {
-  // Room identifier.
-  RoomId room_id = 1;
+  // creator Id
+  UserId user_id = 1;
   // Room name shared with all room members.
   string name = 2;
 }
