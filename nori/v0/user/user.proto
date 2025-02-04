@@ -13,15 +13,15 @@ message User {
   // User identifier.
   UserId user_id = 1;
   // User's unique username.
-  string username = 3;
+  string username = 2;
   // User's email address.
-  string email = 4;
+  string email = 3;
   // User's display name.
-  string display_name = 5;
+  string display_name = 4;
   // User's avatar URL.
-  string avatar_url = 6;
+  string avatar_url = 5;
   // Connected third-party accounts.
-  repeated UserConnection connected_accounts = 7;
+  repeated UserConnection connected_accounts = 6;
   // Rooms that the user is in.
-  repeated RoomId rooms = 8;
+  repeated RoomId rooms = 7;
 }
