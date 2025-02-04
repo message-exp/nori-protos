@@ -12,5 +12,6 @@ message RoomCreateRequest {
   string name = 1;
   // Room creator user_id.
   UserId creator = 2;
-  // TODO: invite members
+  // Room invitees user_id.
+  repeated UserId invitees = 3;
 }

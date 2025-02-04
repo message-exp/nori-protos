@@ -22,12 +22,9 @@ message Message {
   google.protobuf.Timestamp created_at = 3;
 
   // @exclude the following fields should be hidden(encrypt) before sending to the server. (future roadmap)
+
   // Author's user id of the message.
-  UserId author_id = 4;
+  UserId author = 4;
   // Message text content.
   string text = 5;
-  // Message history. Will not implement in MVP.
-  // repeated MessageHistory history = 6;
-  // Section id of which the message belongs to.
-  // repeated SectionId section_id = 7;
 }

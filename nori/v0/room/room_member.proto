@@ -4,6 +4,15 @@ package nori.v0;
 
 import "nori/v0/user/user_id.proto";
 
+enum RoomMemberStatus {
+  // User has joined the room.
+  JOINED = 0;
+  // User has been invited to join the room. The user has not accepted the invitation yet.
+  INVITED = 1;
+  // User has been asked to join the room. The admin has not accepted the request yet.
+  ASKED_TO_JOIN = 2;
+}
+
 /**
  * Room member object.
  */
@@ -12,4 +21,6 @@ message RoomMember {
   UserId user_id = 1;
   // User room nickname that is shared to all room members.
   string room_nickname = 2;
+  // Status of the user in the room.
+  RoomMemberStatus status = 3;
 }
