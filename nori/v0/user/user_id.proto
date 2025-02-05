@@ -7,5 +7,5 @@ package nori.v0;
  */
 message UserId {
   // User identifier. 64 bits snowflake id.
-  bytes user_id = 2;
+  uint64 id = 1;
 }
