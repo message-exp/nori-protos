@@ -7,5 +7,5 @@ package nori.v0;
  */
 message MessageId {
   // Message id (scope: inside the room). 64 bits snowflake id.
-  uint64 message_id = 1;
+  uint64 id = 1;
 }
