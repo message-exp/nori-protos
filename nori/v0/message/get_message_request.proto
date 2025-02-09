@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/room/room_id.proto";
+
+/**
+ * Get message request containing the details for retrieving messages.
+ */
+message GetMessageRequest {
+  // Room id of the message.
+  RoomId room_id = 1;
+  // The maximum number of messages to retrieve.
+  int32 limit = 2;
+  // The number of messages to skip before starting to collect the result set.
+  int32 offset = 3;
+}

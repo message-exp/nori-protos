@@ -6,6 +6,7 @@ import "google/protobuf/empty.proto";
 
 import "nori/v0/message/message.proto";
 import "nori/v0/room/room_id.proto";
+import "nori/v0/message/get_message_request.proto";
 
 /**
  * Message services.
@@ -14,6 +15,6 @@ service MessageService {
   // Authentication: Required. Send a message.
   rpc SendMessage (Message) returns (google.protobuf.Empty);
   
-  // Authentication: Required. Receive messages.
-  rpc GetMessages (RoomId) returns (stream Message);
+  // Authentication: Required. Receive messages based on request parameters.
+  rpc GetMessages (GetMessageRequest) returns (stream Message);
 }
