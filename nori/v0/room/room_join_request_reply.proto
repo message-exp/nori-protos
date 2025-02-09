@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/room/room_id.proto";
+import "nori/v0/user/user_id.proto";
+
+/**
+ * Reply to a join room request or invitation.
+ */
+message RoomJoinRequestReply {
+  // Room id of the message.
+  RoomId room_id = 1;
+  // User id of the person joining.
+  UserId joiner = 2;
+  // Indicates if the join request is accepted.
+  bool accept = 3;
+}
