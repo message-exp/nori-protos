@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/user/user_id.proto";
+import "nori/v0/user/user_connection.proto";
+import "nori/v0/room/room_id.proto";
+
+/**
+ * Sign up request object.
+ */
+message SignUpRequest {
+  // User's unique username.
+  string username = 1;
+  // User's email address.
+  string email = 2;
+  // User's display name.
+  string display_name = 4;
+}
