@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/message/message_id.proto";
+import "nori/v0/room/room_id.proto";
+
+enum Direction {
+  // Retrieve messages older than the baseline.
+  OLDER = 0;
+  // Retrieve messages newer than the baseline.
+  NEWER = 1;
+}
+
+/**
+ * Get message request containing the details for retrieving messages.
+ */
+message GetMessageRequest {
+  // Room id of the message.
+  RoomId room_id = 1;
+  // The maximum number of messages to retrieve. 0 => default limit.
+  uint32 limit = 2;
+  // The baseline message id to retrieve messages from (not included in the response).
+  MessageId baseline = 3;
+  // The direction to retrieve messages.
+  Direction direction = 4;
+}

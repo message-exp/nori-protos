@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package nori.v0;
+
+/**
+ * Represents a user's access token.
+ */
+message AccessToken {
+  // User's access token in bytes.
+  bytes access_token = 1;
+}
