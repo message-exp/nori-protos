@@ -7,7 +7,7 @@ import "nori/v0/user/user_id.proto";
 /**
  * User profile object.
  */
-message UserProfile {
+message UserProfileUpdateRequest {
   // User identifier.
   UserId user_id = 1;
   // User's unique username.

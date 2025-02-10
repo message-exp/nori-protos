@@ -8,7 +8,7 @@ import "nori/v0/user/user.proto";
 import "nori/v0/user/user_id.proto";
 import "nori/v0/user/user_login.proto";
 import "nori/v0/user/signup_request.proto";
-import "nori/v0/user/user_profile.proto";
+import "nori/v0/user/user_profile_update_request.proto";
 import "nori/v0/room/room_list.proto";
 import "nori/v0/user/user_reset_password_request.proto";
 
@@ -22,13 +22,13 @@ service UserService {
   rpc GetUser (UserId) returns (User);
   
   // Authentication: Not required. Sign up a new user.
-  rpc Signup (SignUpRequest) returns (google.protobuf.Empty);
+  rpc Signup (SignUpRequest) returns (UserId);
 
   // Authentication: Required. Delete a user.
   rpc DeleteUser (UserId) returns (google.protobuf.Empty);
 
   // Authentication: Required. Update user profile information.
-  rpc UpdateUserProfile (UserProfile) returns (google.protobuf.Empty);
+  rpc UpdateUserProfile (UserProfileUpdateRequest) returns (google.protobuf.Empty);
 
   // Authentication: Required. Get user room list.
   rpc GetUserRoomList (UserId) returns (RoomList);
@@ -36,7 +36,7 @@ service UserService {
   // Security
 
   // Login with email and password.
-  rpc Login (UserEmailPasswordLogin) returns (google.protobuf.Empty);
+  rpc Login (UserEmailPasswordLogin) returns (UserId);
 
   // Authentication: Required. Log out the user.
   rpc Logout (UserId) returns (google.protobuf.Empty);
