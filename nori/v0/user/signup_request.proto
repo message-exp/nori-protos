@@ -15,5 +15,5 @@ message SignUpRequest {
   // User's email address.
   string email = 2;
   // User's display name.
-  string display_name = 4;
+  string display_name = 3;
 }
