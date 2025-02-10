@@ -15,4 +15,6 @@ message RoomJoinRequestReply {
   UserId joiner = 2;
   // Indicates if the join request is accepted.
   bool accept = 3;
+  // User id of the person accepting the request.
+  UserId approver = 4;
 }

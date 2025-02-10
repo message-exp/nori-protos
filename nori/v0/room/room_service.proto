@@ -7,7 +7,6 @@ import "google/protobuf/empty.proto";
 import "nori/v0/room/room.proto";
 import "nori/v0/room/room_id.proto";
 import "nori/v0/room/room_create_request.proto";
-import "nori/v0/room/room_get_request.proto";
 import "nori/v0/room/room_user_request.proto";
 import "nori/v0/room/invite_user_to_room_request.proto";
 import "nori/v0/room/room_join_invite_reply.proto";
@@ -22,7 +21,7 @@ service RoomService {
   rpc CreateRoom (RoomCreateRequest) returns (RoomId);
 
   // Authentication: Required. Get room information. TODO: tear down and avoid return whole room object.
-  rpc GetRoom (RoomGetRequest) returns (Room);
+  rpc GetRoom (RoomUserRequest) returns (Room);
 
   // Basic information
 
