@@ -2,10 +2,6 @@ syntax = "proto3";
 
 package nori.v0;
 
-import "nori/v0/user/user_id.proto";
-import "nori/v0/user/user_connection.proto";
-import "nori/v0/room/room_id.proto";
-
 /**
  * Sign up request object.
  */
