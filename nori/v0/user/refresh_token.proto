@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package nori.v0;
+
+/**
+ * Represents a user's refresh token.
+ */
+message RefreshToken {
+  // User's refresh token in bytes.
+  string refresh_token = 1;
+}
