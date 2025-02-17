@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/room/room_id.proto";
+
+/**
+ * Reply to an invitation to join a room.
+ */
+message RoomJoinInviteReply {
+  // Room id of the message.
+  RoomId room_id = 1;
+  // Indicates if the join request is accepted.
+  bool accept = 2;
+}
