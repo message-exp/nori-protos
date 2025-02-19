@@ -7,5 +7,5 @@ package nori.v0;
  */
 message AccessToken {
   // User's access token in bytes.
-  bytes access_token = 1;
+  string access_token = 1;
 }

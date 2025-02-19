@@ -7,5 +7,5 @@ package nori.v0;
  */
 message RefreshToken {
   // User's refresh token in bytes.
-  bytes refresh_token = 1;
+  string refresh_token = 1;
 }
