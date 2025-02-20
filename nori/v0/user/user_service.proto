@@ -42,9 +42,11 @@ service UserService {
 
   // Authentication: Required. Log out the user.
   rpc Logout (TokenPair) returns (google.protobuf.Empty);
+  // TODO: add user_id to request (because the unique scope of refresh tokens is each users)
 
   // Authentication: Required. Refresh user token.
   rpc RefreshToken (UserId) returns (AccessToken);
+  // TODO: give refresh token to server (header or body?), and the server will give the client a new "refresh token" and access token.
 
   // Authentication: Required. Reset user password.
   rpc ResetUserPassword (UserResetPasswordRequest) returns (google.protobuf.Empty);
