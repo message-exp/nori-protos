@@ -8,5 +8,5 @@ import "nori/v0/message/message_id.proto";
  * List of messages.
  */
 message MessageList {
-  repeated MessageId messages = 1;
+  repeated Message messages = 1;
 }
