@@ -15,5 +15,8 @@ service MessageService {
   rpc SendMessage (Message) returns (MessageId);
   
   // Authentication: Required. Receive past messages based on request parameters.
-  rpc GetMessages (GetMessageRequest) returns (MessageList);
+  rpc GetHistoryMessages (GetHistoryMessageRequest) returns (MessageList);
+
+  // Authentication: Required. Receive lastest messages.
+  rpc GetLastestMessages (GetLastestMessageRequest) returns (stream Message);
 }
