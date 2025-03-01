@@ -27,7 +27,7 @@ message GetHistoryMessageRequest {
   Direction direction = 4;
 }
 
-message GetLastestMessageRequest {
+message GetLatestMessageRequest {
   // Room id of the message.
   RoomId room_id = 1;
   // User id of the message.
