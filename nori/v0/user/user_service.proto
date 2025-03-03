@@ -9,7 +9,7 @@ import "nori/v0/user/account/user.proto";
 import "nori/v0/user/account/signup_request.proto";
 import "nori/v0/user/account/user_profile_update_request.proto";
 import "nori/v0/user/access/access_token.proto";
-import "nori/v0/user/access/token_pair.proto";
+import "nori/v0/user/access/token_pairs.proto";
 import "nori/v0/user/access/user_login.proto";
 import "nori/v0/user/access/user_reset_password_request.proto";
 import "nori/v0/room/room_list.proto";

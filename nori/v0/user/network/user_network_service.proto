@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package nori.v0;
 
-import "google/protobuf/empty.proto";
+// import "google/protobuf/empty.proto";
 
 import "nori/v0/user/user_id.proto";
 import "nori/v0/room/room_list.proto";
@@ -11,17 +11,19 @@ import "nori/v0/room/room_list.proto";
  * Service for user network.
  */
 service UserNetworkService {
-  // Authentication: Required. Get user room list.
+  // [auth] Get user room list.
   rpc GetUserRoomList (UserId) returns (RoomList);
 
-  // TODO: contact list
-  // Authentication: Required. ...
-  // GetContactList
-  // GetContact
-  // AddContact
-  // UpdateContact
-  // DeleteContact
-  // BlockContact
-  // UnblockContact
+  // Contacts
+
+  // [auth] Get user contact list. Each contact only contains the user's basic information.
+  // rpc GetContactList (UserId) returns (ContactList);
+
+  // GetContactPerson
+  // AddContactPerson
+  // UpdateContactPerson
+  // DeleteContactPerson
+  // BlockContactPerson
+  // UnblockContactPerson
   // ......
 }

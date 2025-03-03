@@ -8,23 +8,23 @@ import "nori/v0/user/user_id.proto";
 import "nori/v0/user/account/user.proto";
 import "nori/v0/user/account/signup_request.proto";
 import "nori/v0/user/account/user_profile_update_request.proto";
-import "nori/v0/user/access/token_pair.proto";
+import "nori/v0/user/access/token_pairs.proto";
 
 /**
  * Service for user account.
  */
 service UserAccountService {
-  // Authentication: Not required. Get user information.
+  // [auth] Get user information.
   rpc GetUser (UserId) returns (User);
   
-  // Authentication: Not required. Sign up a new user.
-  rpc Signup (SignUpRequest) returns (TokenPair);
+  // [auth] Sign up a new user.
+  rpc Signup (SignUpRequest) returns (UserTokenPair);
 
-  // Authentication: Required. Delete a user.
+  // [auth] Delete a user.
   rpc DeleteUser (UserId) returns (google.protobuf.Empty);
 
   // TODO: GetUserProfile
 
-  // Authentication: Required. Update user profile information.
+  // [auth] Update user profile information.
   rpc UpdateUserProfile (UserProfileUpdateRequest) returns (google.protobuf.Empty);
 }
