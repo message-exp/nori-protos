@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "google/protobuf/empty.proto";
+
+import "nori/v0/user/user_id.proto";
+import "nori/v0/room/room_list.proto";
+
+/**
+ * Service for user network.
+ */
+service UserNetworkService {
+  // Authentication: Required. Get user room list.
+  rpc GetUserRoomList (UserId) returns (RoomList);
+
+  // TODO: contact list
+  // Authentication: Required. ...
+  // GetContactList
+  // GetContact
+  // AddContact
+  // UpdateContact
+  // DeleteContact
+  // BlockContact
+  // UnblockContact
+  // ......
+}
