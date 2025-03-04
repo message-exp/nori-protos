@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/user/user_id.proto";
+import "nori/v0/user/access/refresh_token.proto";
+import "nori/v0/user/access/access_token.proto";
+
+/**
+ * TokenPair object that contains both refresh and access tokens.
+ */
+message TokenPair {
+  // Refresh token for user sessions
+  RefreshToken refresh_token = 1;
+  // Access token for user authentication
+  AccessToken access_token = 2;
+}
+
+/**
+ * TokenPair object that contains both refresh and access tokens with user ID.
+ */
+message UserTokenPair {
+  // User ID of the token pair.
+  UserId user_id = 1;
+  // Refresh token for user sessions
+  RefreshToken refresh_token = 2;
+  // Access token for user authentication
+  AccessToken access_token = 3;
+}
+
+/**
+ * Refresh token with user ID.
+ */
+message UserRefreshToken {
+  // User ID of the token pair.
+  UserId user_id = 1;
+  // Refresh token for user sessions
+  RefreshToken refresh_token = 2;
+}
