@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "nori/v0/room/room_id.proto";
+import "nori/v0/user/user_id.proto";
+
+/**
+ * Send message request object.
+ */
+message SendMessageRequest {
+  // Room id of the message.
+  RoomId room_id = 1;
+
+  // @exclude the following fields should be hidden(encrypt) before sending to the server. (future roadmap)
+
+  // Author's user id of the message.
+  UserId author = 2;
+  // Message text content.
+  string text = 3;
+}

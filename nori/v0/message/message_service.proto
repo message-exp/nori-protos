@@ -5,18 +5,19 @@ package nori.v0;
 import "nori/v0/message/message_id.proto";
 import "nori/v0/message/message_list.proto";
 import "nori/v0/message/message.proto";
+import "nori/v0/message/send_message_request.proto";
 import "nori/v0/message/get_message_requests.proto";
 
 /**
  * Message services.
  */
 service MessageService {
-  // Authentication: Required. Send a message.
-  rpc SendMessage (Message) returns (MessageId);
+  // [auth] Send a message.
+  rpc SendMessage (SendMessageRequest) returns (MessageId);
   
-  // Authentication: Required. Receive past messages based on request parameters.
+  // [auth] Receive past messages based on request parameters.
   rpc GetHistoryMessages (GetHistoryMessageRequest) returns (MessageList);
 
-  // Authentication: Required. Receive lastest messages.
+  // [auth] Receive new messages.
   rpc GetLatestMessages (GetLatestMessageRequest) returns (stream Message);
 }
