@@ -24,3 +24,10 @@ message RoomMember {
   // Status of the user in the room.
   RoomMemberStatus status = 3;
 }
+
+/**
+ * List of room members.
+ */
+ message RoomMemberList {
+  repeated RoomMember members = 1;
+}
