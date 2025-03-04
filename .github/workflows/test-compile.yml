@@ -19,8 +19,6 @@ jobs:
       - name: Create test-gen directory
         run: mkdir test-gen
       - name: Test compile proto files
-        run: |
-          set -e
-          find nori -name "*.proto" -exec protoc --proto_path=. --python_out=./test-gen {} \;
+        run: find nori -name "*.proto" -exec protoc --proto_path=. --python_out=./test-gen {} \;
       - name: cleanup
         run: rm -r test-gen
