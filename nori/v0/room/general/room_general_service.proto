@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package nori.v0;
+
+import "google/protobuf/empty.proto";
+
+import "nori/v0/room/room.proto";
+import "nori/v0/room/room_id.proto";
+import "nori/v0/room/room_user_request.proto";
+import "nori/v0/room/general/room_create_request.proto";
+import "nori/v0/room/general/room_basic_info_request.proto";
+import "nori/v0/room/general/room_basic_info_response.proto";
+
+/**
+ * Room general service.
+ */
+service RoomGeneralService {
+  // [auth] Create a new room.
+  rpc CreateRoom (RoomCreateRequest) returns (RoomId);
+
+  // [auth] Get room information. TODO: tear down and avoid return whole room object.
+  rpc GetRoom (RoomUserRequest) returns (Room);
+
+  // [auth] Get room basic information.
+  rpc GetRoomBasic (RoomUserRequest) returns (RoomBasicInfoResponse);
+
+  // [auth] Update room basic/overview information.
+  rpc UpdateRoomBasic (RoomBasicInfoRequest) returns (google.protobuf.Empty);
+}

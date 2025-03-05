@@ -6,12 +6,12 @@ import "google/protobuf/empty.proto";
 
 import "nori/v0/room/room.proto";
 import "nori/v0/room/room_id.proto";
-import "nori/v0/room/room_create_request.proto";
 import "nori/v0/room/room_user_request.proto";
-import "nori/v0/room/invite_user_to_room_request.proto";
-import "nori/v0/room/room_join_invite_reply.proto";
-import "nori/v0/room/room_join_request_reply.proto";
-import "nori/v0/room/room_basic_info_request.proto";
+import "nori/v0/room/general/room_create_request.proto";
+import "nori/v0/room/general/room_basic_info_request.proto";
+import "nori/v0/room/member/invite_user_to_room_request.proto";
+import "nori/v0/room/member/room_join_invite_reply.proto";
+import "nori/v0/room/member/room_join_request_reply.proto";
 
 /**
  * Room services.

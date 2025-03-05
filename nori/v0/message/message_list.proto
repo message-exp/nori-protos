@@ -8,5 +8,8 @@ import "nori/v0/message/message.proto";
  * List of messages.
  */
 message MessageList {
+  // List of messages.
   repeated Message messages = 1;
+  // Whether there are more messages.
+  bool has_more = 2;
 }

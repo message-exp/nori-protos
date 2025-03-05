@@ -4,15 +4,15 @@ package nori.v0;
 
 import "google/protobuf/empty.proto";
 
-import "nori/v0/user/user.proto";
 import "nori/v0/user/user_id.proto";
-import "nori/v0/user/token_pair.proto";
-import "nori/v0/user/access_token.proto";
-import "nori/v0/user/user_login.proto";
-import "nori/v0/user/signup_request.proto";
-import "nori/v0/user/user_profile_update_request.proto";
-import "nori/v0/room/room_list.proto";
-import "nori/v0/user/user_reset_password_request.proto";
+import "nori/v0/user/account/user.proto";
+import "nori/v0/user/account/signup_request.proto";
+import "nori/v0/user/account/user_profile_update_request.proto";
+import "nori/v0/user/access/access_token.proto";
+import "nori/v0/user/access/token_pairs.proto";
+import "nori/v0/user/access/user_login.proto";
+import "nori/v0/user/access/user_reset_password_request.proto";
+import "nori/v0/room/general/room_list.proto";
 
 /**
  * User services.
@@ -29,11 +29,10 @@ service UserService {
   // Authentication: Required. Delete a user.
   rpc DeleteUser (UserId) returns (google.protobuf.Empty);
 
+  // TODO: GetUserProfile
+
   // Authentication: Required. Update user profile information.
   rpc UpdateUserProfile (UserProfileUpdateRequest) returns (google.protobuf.Empty);
-
-  // Authentication: Required. Get user room list.
-  rpc GetUserRoomList (UserId) returns (RoomList);
   
   // Security
 
@@ -47,7 +46,24 @@ service UserService {
   // Authentication: Required. Refresh user token.
   rpc RefreshToken (UserId) returns (AccessToken);
   // TODO: give refresh token to server (header or body?), and the server will give the client a new "refresh token" and access token.
+  // TODO: rename to RefreshUserToken
 
   // Authentication: Required. Reset user password.
   rpc ResetUserPassword (UserResetPasswordRequest) returns (google.protobuf.Empty);
+
+  // Network
+
+  // Authentication: Required. Get user room list.
+  rpc GetUserRoomList (UserId) returns (RoomList);
+
+  // TODO: contact list
+  // Authentication: Required. ...
+  // GetContactList
+  // GetContact
+  // AddContact
+  // UpdateContact
+  // DeleteContact
+  // BlockContact
+  // UnblockContact
+  // ......
 }
