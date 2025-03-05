@@ -5,7 +5,7 @@ package nori.v0;
 // import "google/protobuf/empty.proto";
 
 import "nori/v0/user/user_id.proto";
-import "nori/v0/room/room_list.proto";
+import "nori/v0/room/general/room_list.proto";
 
 /**
  * Service for user network.
