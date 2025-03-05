@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package nori.v0;
 
-import "nori/v0/room/room_basic_info_response.proto";
+import "nori/v0/room/general/room_basic_info_response.proto";
 
 /**
  * List of room basic information.

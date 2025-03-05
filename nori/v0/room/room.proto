@@ -3,7 +3,7 @@ syntax = "proto3";
 package nori.v0;
 
 import "nori/v0/room/room_id.proto";
-import "nori/v0/room/room_member.proto";
+import "nori/v0/room/member/room_member.proto";
 
 /**
  * Room object.

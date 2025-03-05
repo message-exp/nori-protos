@@ -6,13 +6,13 @@ import "google/protobuf/empty.proto";
 
 import "nori/v0/user/user_id.proto";
 import "nori/v0/user/user.proto";
-import "nori/v0/user/signup_request.proto";
-import "nori/v0/user/user_profile_update_request.proto";
-import "nori/v0/user/access_token.proto";
-import "nori/v0/user/token_pair.proto";
-import "nori/v0/user/user_login.proto";
-import "nori/v0/user/user_reset_password_request.proto";
-import "nori/v0/room/room_list.proto";
+import "nori/v0/user/account/signup_request.proto";
+import "nori/v0/user/account/user_profile_update_request.proto";
+import "nori/v0/user/access/access_token.proto";
+import "nori/v0/user/access/token_pairs.proto";
+import "nori/v0/user/access/user_login.proto";
+import "nori/v0/user/access/user_reset_password_request.proto";
+import "nori/v0/room/general/room_list.proto";
 
 /**
  * User services.
