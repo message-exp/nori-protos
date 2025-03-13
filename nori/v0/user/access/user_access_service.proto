@@ -5,7 +5,6 @@ package nori.v0;
 import "google/protobuf/empty.proto";
 
 import "nori/v0/user/access/token_pairs.proto";
-import "nori/v0/user/access/access_token.proto";
 import "nori/v0/user/access/user_login.proto";
 import "nori/v0/user/access/user_reset_password_request.proto";
 
