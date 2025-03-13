@@ -20,9 +20,8 @@ service UserAccessService {
   rpc Logout (UserTokenPair) returns (google.protobuf.Empty);
 
   // Refresh user token.
-  rpc RefreshUserToken (UserRefreshToken) returns (AccessToken);
-  // TODO: give refresh token to server (header or body?), and the server will give the client a new "refresh token" and access token. (?)
-
+  rpc RefreshUserToken (UserTokenPair) returns (TokenPair);
+  
   // [auth] Reset user password.
   rpc ResetUserPassword (UserResetPasswordRequest) returns (google.protobuf.Empty);
 }
