@@ -19,7 +19,7 @@ service UserAccessService {
   rpc Logout (UserTokenPair) returns (google.protobuf.Empty);
 
   // Refresh user token.
-  rpc RefreshUserToken (UserTokenPair) returns (TokenPair);
+  rpc RefreshUserToken (UserRefreshToken) returns (TokenPair);
   
   // [auth] Reset user password.
   rpc ResetUserPassword (UserResetPasswordRequest) returns (google.protobuf.Empty);
